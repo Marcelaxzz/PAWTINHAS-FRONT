@@ -1,0 +1,59 @@
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 20px;
+  background: var(--cor-superficie);
+  box-shadow: var(--sombra-suave);
+}
+
+.nome {
+  font-family: var(--fonte-serifa);
+  font-size: var(--texto-lg);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--cor-cafe-escuro);
+  overflow-wrap: anywhere;
+}
+
+.linha {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: var(--texto-sm);
+  color: var(--cor-cafe);
+  overflow-wrap: anywhere;
+}
+
+.linha svg {
+  flex: none;
+  margin-top: 3px;
+  color: var(--cor-caramelo-escuro);
+}
+
+.pets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pets a {
+  text-decoration: none;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+}

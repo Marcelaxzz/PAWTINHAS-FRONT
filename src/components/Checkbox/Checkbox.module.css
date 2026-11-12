@@ -1,0 +1,64 @@
+.checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nativo {
+  position: absolute;
+  inset: 0;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.caixa {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  background: var(--cor-superficie);
+  border: 1.5px solid var(--cor-borda-forte);
+  border-radius: 5px;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.marca {
+  color: var(--cor-branco);
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.nativo:checked + .caixa {
+  background: var(--cor-cafe);
+  border-color: var(--cor-cafe);
+}
+
+.nativo:checked + .caixa .marca {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.nativo:focus-visible + .caixa {
+  outline: 3px solid var(--cor-caramelo);
+  outline-offset: 2px;
+}
+
+.checkbox:hover .caixa {
+  border-color: var(--cor-caramelo);
+}
+
+.texto {
+  font-size: var(--texto-sm);
+  color: var(--cor-taupe-escuro);
+}

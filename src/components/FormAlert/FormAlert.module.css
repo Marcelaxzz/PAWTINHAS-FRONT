@@ -1,0 +1,35 @@
+.alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: var(--raio-campo);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  font-weight: 500;
+  animation: surgir 0.2s ease-out;
+}
+
+.erro {
+  background: var(--cor-erro-fundo);
+  color: var(--cor-erro);
+  border: 1px solid rgba(179, 38, 30, 0.2);
+}
+
+.sucesso {
+  background: var(--cor-sucesso-fundo);
+  color: var(--cor-sucesso);
+  border: 1px solid rgba(63, 106, 69, 0.2);
+}
+
+.icone {
+  flex: none;
+  margin-top: 1px;
+}
+
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}

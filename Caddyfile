@@ -1,0 +1,44 @@
+# Site em produção. Variáveis:
+#   PORT         porta em que o Caddy escuta (o Railway define sozinho)
+#   API_INTERNA  endereço interno da API, ex.: http://pawtinhas-back.railway.internal:8080
+{
+	admin off
+}
+
+:{$PORT:8080} {
+	encode zstd gzip
+
+	# A API fica no mesmo domínio do site: os cookies de sessão são SameSite=Strict.
+	handle /api/* {
+		reverse_proxy {$API_INTERNA} {
+			# Repassa o IP do visitante e o https que o proxy do Railway anotou.
+			header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+			header_up X-Forwarded-Proto {http.request.header.X-Forwarded-Proto}
+		}
+	}
+
+	# Os mesmos cabeçalhos que a API manda quando ela mesma serve o site (README, "Produção").
+	header {
+		Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+		X-Frame-Options DENY
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		Permissions-Policy "camera=(self), microphone=(), geolocation=(), payment=()"
+		-Server
+	}
+
+	# O worker da medição precisa de eval para o OpenCV.js e não fala com a rede.
+	@worker path /assets/visao-worker-*.js
+	header @worker Content-Security-Policy "default-src 'none'; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval'; connect-src 'none'"
+
+	# Arquivos do build têm hash no nome: podem ficar em cache por um ano.
+	@assets path /assets/*
+	header @assets Cache-Control "public, max-age=31536000, immutable"
+
+	# Rotas do React (/agenda, /pacientes...) caem no index.html.
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+}

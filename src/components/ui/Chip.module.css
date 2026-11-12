@@ -1,0 +1,55 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 999px;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.md {
+  padding: 4px 12px;
+  font-size: var(--texto-sm);
+}
+
+.sm {
+  padding: 3px 11px;
+  font-size: 0.9375rem;
+}
+
+.xs {
+  padding: 3px 10px;
+  font-size: var(--texto-xs);
+}
+
+.neutro {
+  background: rgba(110, 77, 54, 0.08);
+  color: var(--cor-cafe);
+}
+
+.tag {
+  background: rgba(216, 161, 107, 0.18);
+  color: var(--cor-cafe);
+}
+
+.sucesso {
+  background: var(--cor-salvia-fundo);
+  color: var(--cor-salvia-texto);
+}
+
+.perigo {
+  background: var(--cor-terracota-fundo);
+  color: var(--cor-terracota-texto);
+}
+
+.alerta {
+  background: var(--cor-mel-fundo);
+  color: var(--cor-mel-texto);
+}
+
+.info {
+  background: var(--cor-ceu-fundo);
+  color: var(--cor-ceu-texto);
+}

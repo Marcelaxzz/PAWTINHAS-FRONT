@@ -1,0 +1,61 @@
+.linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.textos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rotulo {
+  font-size: var(--texto-base);
+  font-weight: 600;
+  color: var(--cor-cafe-escuro);
+  cursor: pointer;
+}
+
+.descricao {
+  font-size: 0.9375rem;
+  color: var(--cor-taupe);
+}
+
+.chave {
+  position: relative;
+  flex: none;
+  width: 48px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--cor-borda-forte);
+  transition: background-color 0.2s ease;
+}
+
+.ligada {
+  background: var(--cor-cafe);
+}
+
+.bolinha {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--cor-branco);
+  box-shadow: 0 1px 3px rgba(54, 36, 26, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.ligada .bolinha {
+  transform: translateX(22px);
+}
+
+.chave:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

@@ -1,0 +1,35 @@
+.bloco {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  margin-top: 22px;
+  padding: 14px 16px;
+  border: 1px solid var(--cor-borda);
+  border-left: 4px solid var(--cor-caramelo);
+  border-radius: 14px;
+  background: var(--cor-creme-claro);
+}
+
+.bloco > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bloco strong {
+  font-size: var(--texto-base);
+  color: var(--cor-cafe-escuro);
+}
+
+.bloco span {
+  font-size: var(--texto-sm);
+  color: var(--cor-taupe);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

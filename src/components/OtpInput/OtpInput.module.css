@@ -1,0 +1,55 @@
+.grupo {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.digito {
+  width: clamp(42px, 12.5vw, 72px);
+  aspect-ratio: 1;
+  height: auto;
+  padding: 0;
+  text-align: center;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.25rem, 4.5vw, 1.5rem);
+  font-weight: 700;
+  color: var(--cor-cafe-escuro);
+  background: var(--cor-superficie);
+  border: 2px solid var(--cor-borda);
+  border-radius: 14px;
+  outline: none;
+  caret-color: var(--cor-caramelo);
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.preenchido {
+  background: var(--cor-branco);
+  border-color: var(--cor-cafe);
+}
+
+.digito:focus {
+  border-color: var(--cor-caramelo);
+  box-shadow: var(--anel-foco);
+}
+
+.invalido,
+.invalido.preenchido {
+  border-color: var(--cor-erro);
+  animation: tremer 0.3s ease;
+}
+
+.digito:disabled {
+  opacity: 0.6;
+}
+
+@keyframes tremer {
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}

@@ -1,0 +1,29 @@
+.voltar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: var(--cor-cafe);
+  color: var(--cor-areia);
+  box-shadow: 0 8px 18px -12px rgba(54, 36, 26, 0.7);
+  transition:
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.voltar:hover {
+  background: var(--cor-cafe-hover);
+  transform: translateX(-2px);
+}
+
+@media (max-width: 760px) {
+  .voltar {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+  }
+}

@@ -1,0 +1,29 @@
+# Dependências e build
+node_modules
+dist
+dist-ssr
+*.local
+
+# Certificado local do "npm run dev:celular"
+certificados
+
+# Variáveis de ambiente (nunca versionar segredos)
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.sw?
+
+# Gerado por scripts/copiar-opencv.mjs
+public/vendor/

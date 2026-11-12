@@ -1,0 +1,198 @@
+@import '@fontsource-variable/lexend';
+@import '@fontsource-variable/fraunces/opsz.css';
+
+:root {
+  /* Paleta da marca */
+  --cor-areia: #f4e6d3;
+  --cor-creme: #fbf6eb;
+  --cor-creme-claro: #f9f6ef;
+  --cor-borda: #e9dfca;
+  --cor-caramelo: #d8a16b;
+  --cor-caramelo-escuro: #c18c5e;
+  --cor-ferrugem: #8a4f26;
+  --cor-cafe: #6e4d36;
+  --cor-cafe-medio: #493424;
+  --cor-cafe-escuro: #36241a;
+  --cor-taupe: #897260;
+  --cor-taupe-escuro: #6e574b;
+  --cor-branco: #ffffff;
+  --cor-cafe-hover: #5d402c;
+  --cor-borda-forte: #d9cdb8;
+  --cor-superficie: #fffdf9; /* cartões e campos sobre o fundo creme */
+  --cor-foto-vazia: #ecdfcc; /* fundo enquanto a foto carrega */
+
+  /* Estados */
+  --cor-erro: #b3261e;
+  --cor-erro-escuro: #8f1d17;
+  --cor-erro-fundo: #fbe9e7;
+  --cor-erro-fundo-forte: #f6d3cd;
+  --cor-sucesso: #3f6a45;
+  --cor-sucesso-fundo: #e7efe0;
+  --cor-aviso: #8a5f12;
+  --cor-aviso-fundo: #fbf0d6;
+
+  /*
+   * Cores de apoio: sempre em par (texto forte + fundo suave), para dar cor às
+   * categorias e estados sem competir com o café e o caramelo da marca.
+   */
+  --cor-salvia: #6f8f62;
+  --cor-salvia-texto: #3f6a45;
+  --cor-salvia-fundo: #e7efe0;
+  --cor-ceu: #5b7f99;
+  --cor-ceu-texto: #3d6079;
+  --cor-ceu-fundo: #e2edf3;
+  --cor-mel: #d9a441;
+  --cor-mel-texto: #8a5f12;
+  --cor-mel-fundo: #fbf0d6;
+  --cor-rosa: #d4566a;
+  --cor-rosa-texto: #a83c4c;
+  --cor-rosa-fundo: #fbe7e8;
+  --cor-lavanda: #8a76b0;
+  --cor-lavanda-texto: #5e4d82;
+  --cor-lavanda-fundo: #ede7f6;
+  --cor-terracota: #c8573c;
+  --cor-terracota-texto: #a8432c;
+  --cor-terracota-fundo: #fbe6dd;
+
+  /* Tipografia: Fraunces nos títulos, Lexend em todo o resto */
+  --fonte-titulo: 'Lexend Variable', 'Lexend', system-ui, sans-serif;
+  --fonte-texto: 'Lexend Variable', 'Lexend', system-ui, sans-serif;
+  --fonte-serifa: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+
+  /* Escala de tamanhos (1rem = 19px). O menor texto do site tem ~18px. */
+  --texto-xs: 0.9375rem; /* ~17px: etiquetas */
+  --texto-sm: 1rem; /* 18px: apoio, rótulos */
+  --texto-base: 1.0625rem; /* ~19px: corpo e botões */
+  --texto-md: 1.125rem; /* ~20px: parágrafos de destaque */
+  --texto-lg: 1.1875rem; /* ~21px: subtítulos */
+  --titulo-sm: 1.25rem; /* ~22px: títulos de cartão */
+  --titulo-md: 1.5rem; /* 27px: títulos de seção */
+  --titulo-lg: clamp(1.875rem, 4vw, 2.5rem); /* 30 a 40px: título da página */
+  --titulo-xl: clamp(2.25rem, 6vw, 3.5rem); /* destaque */
+
+  /* Layout */
+  --altura-header: 80px;
+  --largura-conteudo: 1360px;
+  --margem-pagina: clamp(16px, 4vw, 48px);
+
+  --gradiente-cafe: linear-gradient(90deg, #6e4d36 0%, #36241a 100%);
+  --gradiente-ferrugem: linear-gradient(90deg, #8a4f26 0%, #36241a 100%);
+  /* Painéis de destaque (login, banners): o mesmo café dos botões, na diagonal */
+  --gradiente-painel: linear-gradient(155deg, #7a5539 0%, #5a3d2a 48%, #36241a 100%);
+
+  --sombra-botao: 0 10px 24px -8px rgba(54, 36, 26, 0.35);
+  --sombra-card: 0 30px 60px -20px rgba(54, 36, 26, 0.18);
+  --sombra-suave: 0 14px 30px -24px rgba(54, 36, 26, 0.45);
+  --sombra-media: 0 22px 40px -26px rgba(54, 36, 26, 0.55);
+  --sombra-elevada: 0 1px 2px rgba(54, 36, 26, 0.04), 0 12px 32px -18px rgba(54, 36, 26, 0.32);
+  --anel-foco: 0 0 0 4px rgba(216, 161, 107, 0.28);
+
+  --raio-campo: 12px;
+  --raio-sm: 10px;
+  --raio-md: 16px;
+  --raio-lg: 24px;
+  --raio-card: 32px;
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Todas as fontes do site usam rem: aumentar aqui aumenta tudo (19px de base em vez de 16px).
+   Os espaçamentos ficam em px, então o layout não muda. */
+html {
+  font-size: 118.75%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--cor-areia);
+  color: var(--cor-cafe-escuro);
+  font-family: var(--fonte-texto);
+  font-size: var(--texto-base);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--cor-caramelo);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: rgba(216, 161, 107, 0.35);
+  color: var(--cor-cafe-escuro);
+}
+
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --altura-header: 68px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

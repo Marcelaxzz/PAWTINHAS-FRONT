@@ -1,0 +1,124 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.foto {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.rotuloFoto {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--cor-cafe-escuro);
+}
+
+.link {
+  margin-top: 6px;
+}
+
+.modal .foto {
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.convivencia {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin: 26px 0 0;
+  padding: 18px 20px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 14px;
+}
+
+.convivencia legend {
+  padding: 0 6px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--cor-cafe-escuro);
+}
+
+.modal .convivencia legend {
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--texto-base);
+  font-weight: 500;
+  color: var(--cor-cafe-escuro);
+  cursor: pointer;
+}
+
+.check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--cor-cafe);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.modal .acoes {
+  padding-top: 28px;
+  border-top: 1px solid var(--cor-borda);
+}
+
+.cancelar,
+.enviar {
+  min-height: 48px;
+  padding: 0 30px;
+  border-radius: 999px;
+  font-size: var(--texto-base);
+  font-weight: 600;
+  transition:
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.cancelar {
+  border: 1.5px solid var(--cor-cafe);
+  background: transparent;
+  color: var(--cor-cafe);
+}
+
+.cancelar:hover:not(:disabled) {
+  background: rgba(110, 77, 54, 0.08);
+}
+
+.enviar {
+  border: 0;
+  background: var(--cor-cafe);
+  color: var(--cor-branco);
+  box-shadow: 0 12px 22px -14px rgba(54, 36, 26, 0.7);
+}
+
+.enviar:hover:not(:disabled) {
+  background: var(--cor-cafe-hover);
+  transform: translateY(-1px);
+}
+
+.cancelar:disabled,
+.enviar:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+@media (max-width: 560px) {
+  .acoes > * {
+    flex: 1;
+  }
+}

@@ -1,0 +1,189 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  background: var(--cor-superficie);
+  box-shadow: var(--sombra-suave);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--cor-borda-forte);
+  box-shadow: 0 26px 40px -28px rgba(54, 36, 26, 0.55);
+}
+
+/* 4:3 e foto inteira (FotoInteira): bicho em pé ou deitado aparece sem cortar a cabeça. */
+.foto {
+  aspect-ratio: 4 / 3;
+}
+
+.foto img:last-of-type {
+  transition: transform 0.35s ease;
+}
+
+.card:hover .foto img:last-of-type {
+  transform: scale(1.03);
+}
+
+.favorito {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--cor-branco);
+  color: var(--cor-cafe-medio);
+  box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.45);
+  transition:
+    transform 0.18s ease,
+    color 0.18s ease;
+}
+
+.favorito:hover {
+  transform: scale(1.08);
+}
+
+.favoritado {
+  color: var(--cor-rosa);
+}
+
+.selo {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--cor-cafe-escuro);
+  font-size: var(--texto-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--cor-branco);
+}
+
+.processo {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--cor-caramelo);
+  font-size: var(--texto-xs);
+  font-weight: 700;
+  color: var(--cor-cafe-escuro);
+}
+
+.corpo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px 24px 24px;
+}
+
+.topo {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nome {
+  font-family: var(--fonte-serifa);
+  font-size: 1.375rem;
+  font-weight: 900;
+  color: var(--cor-cafe-escuro);
+}
+
+.idade {
+  flex: none;
+  font-size: var(--texto-sm);
+  color: var(--cor-taupe-escuro);
+}
+
+.local {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: var(--texto-sm);
+  color: var(--cor-taupe-escuro);
+}
+
+.local svg {
+  flex: none;
+  color: var(--cor-rosa);
+}
+
+.porte {
+  margin-left: auto;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--cor-areia);
+  font-size: var(--texto-xs);
+  font-weight: 600;
+  color: var(--cor-cafe);
+}
+
+.descricao {
+  flex: 1;
+  display: -webkit-box;
+  margin-top: 12px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  font-size: var(--texto-base);
+  line-height: 1.55;
+  color: var(--cor-taupe-escuro);
+}
+
+.botao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 48px;
+  margin-top: 18px;
+  padding: 0 8px 0 20px;
+  border-radius: 999px;
+  background: var(--cor-areia);
+  font-size: var(--texto-base);
+  font-weight: 700;
+  color: var(--cor-cafe-escuro);
+  text-decoration: none;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.botao svg {
+  box-sizing: content-box;
+  padding: 7px;
+  border-radius: 50%;
+  background: var(--cor-cafe);
+  color: var(--cor-branco);
+  transition: transform 0.18s ease;
+}
+
+.botao:hover,
+.card:hover .botao {
+  background: var(--cor-cafe);
+  color: var(--cor-branco);
+}
+
+.botao:hover svg,
+.card:hover .botao svg {
+  background: var(--cor-caramelo);
+  color: var(--cor-cafe-escuro);
+  transform: translateX(2px);
+}

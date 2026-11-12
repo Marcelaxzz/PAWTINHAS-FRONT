@@ -1,0 +1,198 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+}
+
+.cartao {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  background: var(--cor-branco);
+  box-shadow: var(--sombra-suave);
+}
+
+.titulo {
+  font-family: var(--fonte-serifa);
+  font-size: var(--titulo-sm);
+  font-weight: 900;
+  color: var(--cor-cafe-escuro);
+}
+
+.medidas,
+.resumo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.medidas div,
+.resumo div {
+  padding: 10px 14px;
+  border-radius: var(--raio-sm);
+  background: var(--cor-creme-claro);
+}
+
+.medidas dt,
+.resumo dt {
+  font-size: var(--texto-xs);
+  color: var(--cor-taupe);
+}
+
+.medidas dd,
+.resumo dd {
+  margin: 2px 0 0;
+  font-weight: 700;
+  color: var(--cor-cafe-escuro);
+}
+
+.desenho {
+  width: 100%;
+  max-height: 420px;
+}
+
+.cabecalhoVista {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.alternar {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-creme-claro);
+}
+
+.alternar button {
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: var(--texto-xs);
+  font-weight: 600;
+  color: var(--cor-taupe);
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.alternar button:hover {
+  color: var(--cor-cafe);
+}
+
+.alternar .alternarAtivo,
+.alternar .alternarAtivo:hover {
+  background: var(--gradiente-cafe);
+  color: var(--cor-branco);
+}
+
+/* Palco da peça em 3D: fundo com luz suave vinda de cima. */
+.palco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 16px 12px;
+  border-radius: var(--raio-md);
+  background:
+    radial-gradient(120% 80% at 50% 0%, #fffaf2 0%, transparent 70%),
+    linear-gradient(180deg, var(--cor-creme-claro) 0%, var(--cor-areia) 100%);
+}
+
+.desenho3d {
+  width: 100%;
+  max-height: 400px;
+  touch-action: none;
+  cursor: grab;
+}
+
+.desenho3d:active {
+  cursor: grabbing;
+}
+
+.desenho3d:focus {
+  outline: none;
+}
+
+.desenho3d:focus-visible {
+  outline: 3px solid var(--cor-caramelo);
+  border-radius: var(--raio-sm);
+}
+
+.forma-lateral,
+.forma-tampa,
+.forma-fundo {
+  stroke: rgba(54, 36, 26, 0.35);
+  stroke-width: 0.6;
+  stroke-linejoin: round;
+}
+
+.dicaArraste {
+  font-size: var(--texto-xs);
+  color: var(--cor-taupe);
+}
+
+.fantasma {
+  opacity: 0.35;
+  filter: grayscale(0.6);
+}
+
+.fantasma .desenho3d {
+  max-height: 260px;
+  cursor: default;
+}
+
+.chao {
+  stroke: var(--cor-borda-forte);
+  stroke-width: 2;
+}
+
+.peca {
+  fill: rgba(216, 161, 107, 0.35);
+  stroke: var(--cor-cafe);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.cota {
+  stroke: var(--cor-ceu);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.textoCota {
+  font-family: var(--fonte-texto);
+  font-size: var(--texto-xs);
+  font-weight: 600;
+  fill: var(--cor-ceu-texto);
+}
+
+.nota {
+  font-size: var(--texto-sm);
+  color: var(--cor-taupe);
+}
+
+.problema {
+  padding: 10px 14px;
+  border-radius: var(--raio-sm);
+  background: var(--cor-aviso-fundo);
+  color: var(--cor-aviso);
+}
+
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

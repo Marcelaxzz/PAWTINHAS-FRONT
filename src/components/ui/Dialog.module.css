@@ -1,0 +1,153 @@
+.dialogo {
+  width: min(100% - 32px, 560px);
+  max-height: min(100dvh - 48px, 860px);
+  padding: 0;
+  border: 0;
+  border-radius: 24px;
+  background: var(--cor-creme-claro);
+  color: var(--cor-cafe-escuro);
+  box-shadow: 0 40px 80px -30px rgba(54, 36, 26, 0.5);
+  overflow: hidden;
+}
+
+.dialogo[open] {
+  animation: entrar 0.2s ease-out;
+}
+
+.dialogo::backdrop {
+  background: rgba(54, 36, 26, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.sm {
+  width: min(100% - 32px, 440px);
+}
+
+.lg {
+  width: min(100% - 32px, 880px);
+}
+
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  max-height: inherit;
+}
+
+.cabecalho {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 24px 18px 28px;
+}
+
+.claro {
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.escuro {
+  background: var(--cor-cafe);
+  color: var(--cor-branco);
+}
+
+.titulo {
+  font-family: var(--fonte-serifa);
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.descricao {
+  margin-top: 6px;
+  font-size: 0.9375rem;
+  opacity: 0.85;
+}
+
+.fechar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin: -4px -6px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+}
+
+.fechar:hover {
+  background: rgba(110, 77, 54, 0.12);
+}
+
+.corpo {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px 28px 26px;
+}
+
+.rodape {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 28px 22px;
+  border-top: 1px solid var(--cor-borda);
+}
+
+.mensagem {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--cor-taupe-escuro);
+}
+
+.botaoSecundario,
+.botaoPerigo {
+  min-height: 42px;
+  padding: 0 22px;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.botaoSecundario {
+  border: 1px solid var(--cor-borda);
+  background: var(--cor-branco);
+  color: var(--cor-cafe-escuro);
+}
+
+.botaoPerigo {
+  border: 0;
+  background: var(--cor-erro);
+  color: var(--cor-branco);
+}
+
+.botaoPerigo:hover:not(:disabled) {
+  background: var(--cor-erro-escuro);
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+@media (max-width: 560px) {
+  .cabecalho {
+    padding: 20px 18px 14px 20px;
+  }
+
+  .corpo {
+    padding: 18px 20px 22px;
+  }
+
+  .rodape {
+    padding: 14px 20px 18px;
+  }
+
+  .rodape > * {
+    flex: 1;
+  }
+}

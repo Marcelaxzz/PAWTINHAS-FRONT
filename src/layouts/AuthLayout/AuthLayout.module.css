@@ -1,0 +1,175 @@
+/* Telas de acesso ao painel: cartão quase do tamanho da tela, painel café + formulário. */
+
+.pagina {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 16px;
+  background: var(--cor-areia);
+}
+
+.cartao {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: calc(100dvh - 32px);
+  background: var(--cor-creme);
+  border-radius: var(--raio-card);
+  box-shadow: 0 30px 60px -30px rgba(54, 36, 26, 0.3);
+  overflow: hidden;
+}
+
+/* ---------- Painel ---------- */
+
+.painel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 48px 56px 0;
+  background: var(--gradiente-painel);
+  color: var(--cor-branco);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 14px;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.selo {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--cor-creme);
+}
+
+.selo img {
+  width: 40px;
+  height: auto;
+}
+
+.marcaNome {
+  font-family: var(--fonte-serifa);
+  font-size: 1.375rem;
+  font-weight: 900;
+}
+
+.titulo {
+  max-width: 12ch;
+  margin-top: clamp(40px, 9vh, 96px);
+  font-family: var(--fonte-serifa);
+  font-size: clamp(2.25rem, 3.6vw, 3.25rem);
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.ilustracao {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 240px;
+  margin: 24px -56px 0;
+}
+
+.pets {
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: auto;
+  height: 100%;
+  max-width: 110%;
+  object-fit: contain;
+  object-position: bottom center;
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- Formulário ---------- */
+
+.formulario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px clamp(28px, 6vw, 96px);
+  --campo-rotulo: var(--cor-cafe-medio);
+  --campo-icone: var(--cor-cafe);
+  --campo-placeholder: var(--cor-taupe);
+  --campo-valor: var(--cor-cafe-escuro);
+  --campo-peso-rotulo: 600;
+  --campo-altura: 52px;
+  --campo-gap-rotulo: 8px;
+  --botao-altura: 54px;
+}
+
+.formularioConteudo {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ---------- Tablet e celular ---------- */
+
+@media (max-width: 900px) {
+  .pagina {
+    padding: 12px;
+  }
+
+  .cartao {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: calc(100dvh - 24px);
+    border-radius: 24px;
+  }
+
+  .painel {
+    padding: 24px 24px 0;
+  }
+
+  .titulo {
+    max-width: none;
+    margin-top: 20px;
+    font-size: 1.875rem;
+  }
+
+  .ilustracao {
+    flex: none;
+    height: 180px;
+    min-height: 0;
+    margin: 8px -24px 0;
+  }
+
+  .formulario {
+    align-items: flex-start;
+    padding: 32px 24px 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  .ilustracao {
+    display: none;
+  }
+
+  .painel {
+    padding-bottom: 24px;
+  }
+
+  .selo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .selo img {
+    width: 32px;
+  }
+
+  .titulo {
+    font-size: 1.625rem;
+  }
+}

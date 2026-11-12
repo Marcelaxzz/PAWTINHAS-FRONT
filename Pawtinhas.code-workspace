@@ -1,0 +1,75 @@
+{
+  "folders": [
+    { "name": "Pawtinhas-Front (React)", "path": "." },
+    { "name": "Pawtinhas-Back (C# API)", "path": "../Pawtinhas-Back" },
+    { "name": "Pawtinhas-Mobile (Expo)", "path": "../Pawtinhas-Mobile" }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/bin": true,
+      "**/obj": true,
+      "**/node_modules": true,
+      "**/.expo": true
+    },
+    "search.exclude": {
+      "**/dist": true,
+      "**/dados": true,
+      "**/Migracoes": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-dotnettools.csdevkit",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "expo.vscode-expo-tools"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Pawtinhas: Banco",
+        "type": "shell",
+        "command": "powershell -ExecutionPolicy Bypass -File scripts/banco-local.ps1",
+        "options": { "cwd": "${workspaceFolder:Pawtinhas-Back (C# API)}" },
+        "problemMatcher": [],
+        "presentation": { "group": "pawtinhas", "panel": "dedicated" }
+      },
+      {
+        "label": "Pawtinhas: API",
+        "type": "shell",
+        "command": "dotnet run --launch-profile http --urls http://0.0.0.0:5135",
+        "dependsOn": ["Pawtinhas: Banco"],
+        "options": { "cwd": "${workspaceFolder:Pawtinhas-Back (C# API)}/src/Pawtinhas.API" },
+        "isBackground": true,
+        "problemMatcher": [],
+        "presentation": { "group": "pawtinhas", "panel": "dedicated" }
+      },
+      {
+        "label": "Pawtinhas: Site",
+        "type": "shell",
+        "command": "npm run dev -- --host",
+        "options": { "cwd": "${workspaceFolder:Pawtinhas-Front (React)}" },
+        "isBackground": true,
+        "problemMatcher": [],
+        "presentation": { "group": "pawtinhas", "panel": "dedicated" }
+      },
+      {
+        "label": "Pawtinhas: App mobile",
+        "type": "shell",
+        "command": "npm start",
+        "options": { "cwd": "${workspaceFolder:Pawtinhas-Mobile (Expo)}" },
+        "isBackground": true,
+        "problemMatcher": [],
+        "presentation": { "group": "pawtinhas", "panel": "dedicated" }
+      },
+      {
+        "label": "Pawtinhas: iniciar tudo",
+        "dependsOn": ["Pawtinhas: API", "Pawtinhas: Site", "Pawtinhas: App mobile"],
+        "dependsOrder": "parallel",
+        "problemMatcher": []
+      }
+    ]
+  }
+}

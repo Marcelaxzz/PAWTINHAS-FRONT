@@ -1,0 +1,274 @@
+/*
+ * Título e botões centralizados na tela. O coelho e o gato acompanham a largura da
+ * janela, e o título encolhe o suficiente para nunca encostar neles.
+ */
+
+.pagina {
+  --coelho: clamp(300px, 32vw, 601px);
+  --gato: clamp(300px, 32vw, 606px);
+  --titulo-tamanho: min(170px, calc((68vw - 24px) / 6.95));
+
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--cor-areia);
+}
+
+.logo {
+  position: absolute;
+  z-index: 2;
+  top: -14px;
+  left: 0;
+  width: 187px;
+  height: auto;
+}
+
+.coelho {
+  position: absolute;
+  z-index: 0;
+  top: calc(var(--coelho) * -0.057);
+  right: calc(var(--coelho) * -0.265);
+  width: var(--coelho);
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+}
+
+.gato {
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  left: calc(var(--gato) * -0.167);
+  width: var(--gato);
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+}
+
+.conteudo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 40px 24px;
+}
+
+.bloco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--fonte-titulo);
+  font-weight: inherit;
+  text-align: center;
+}
+
+.saudacao {
+  font-size: calc(var(--titulo-tamanho) * 0.294);
+  font-weight: 600;
+  line-height: 1.28;
+  text-transform: uppercase;
+  color: var(--cor-taupe);
+}
+
+.marca {
+  margin-top: calc(var(--titulo-tamanho) * -0.053);
+  font-size: var(--titulo-tamanho);
+  font-weight: 800;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-shadow: 0 8px 12px rgba(54, 36, 26, 0.12);
+}
+
+.escuro {
+  color: var(--cor-cafe-escuro);
+}
+
+.medio {
+  color: var(--cor-cafe-medio);
+}
+
+.cafe {
+  color: var(--cor-cafe);
+}
+
+.caramelo {
+  color: var(--cor-caramelo-escuro);
+}
+
+.claro {
+  color: var(--cor-caramelo);
+}
+
+.acoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: clamp(36px, 7vh, 72px);
+}
+
+.botoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+.botaoCatalogo,
+.botaoLogin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 60px;
+  padding: 0 34px;
+  border-radius: 999px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    filter 0.2s ease;
+}
+
+.botaoCatalogo {
+  background: var(--gradiente-cafe);
+  color: var(--cor-branco);
+  box-shadow: 0 16px 30px -14px rgba(54, 36, 26, 0.5);
+}
+
+.botaoLogin {
+  border: 1.5px solid var(--cor-borda-forte);
+  background: rgba(255, 253, 249, 0.75);
+  color: var(--cor-cafe);
+}
+
+.botaoCatalogo:hover,
+.botaoLogin:hover {
+  transform: translateY(-2px);
+}
+
+.botaoCatalogo:hover {
+  filter: brightness(1.08);
+}
+
+.botaoLogin:hover {
+  border-color: var(--cor-caramelo);
+}
+
+.botaoCatalogo:active,
+.botaoLogin:active {
+  transform: translateY(0);
+}
+
+.linkSobre {
+  margin-top: 28px;
+  font-size: var(--texto-md);
+  font-weight: 600;
+  color: var(--cor-cafe);
+  text-decoration: underline;
+  text-decoration-color: var(--cor-caramelo);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+}
+
+.linkSobre:hover {
+  color: var(--cor-cafe-escuro);
+}
+
+/* ---------- Telas baixas (notebooks) ---------- */
+
+@media (max-height: 760px) and (min-width: 901px) {
+  .logo {
+    width: 140px;
+  }
+
+  .linkSobre {
+    margin-top: 22px;
+  }
+}
+
+/* ---------- Tablet e celular: o título fica entre o coelho e o gato ---------- */
+
+@media (max-width: 900px) {
+  .pagina {
+    --coelho: 380px;
+    --gato: 380px;
+    --titulo-tamanho: min(170px, calc((100vw - 48px) / 6.95));
+  }
+
+  .logo {
+    width: 140px;
+    top: -10px;
+  }
+
+  .conteudo {
+    align-items: flex-start;
+    padding-top: 260px;
+  }
+
+  .bloco {
+    width: 100%;
+  }
+
+  .acoes {
+    margin-top: 48px;
+    padding-bottom: 300px;
+  }
+}
+
+/* ---------- Celular ---------- */
+
+@media (max-width: 560px) {
+  .logo {
+    width: 104px;
+    top: -6px;
+  }
+
+  .pagina {
+    --coelho: 260px;
+    --gato: 290px;
+  }
+
+  .conteudo {
+    padding: 200px 20px 0;
+  }
+
+  .saudacao {
+    font-size: max(1.125rem, calc(var(--titulo-tamanho) * 0.32));
+  }
+
+  .acoes {
+    margin-top: 36px;
+    padding-bottom: 220px;
+  }
+
+  .botoes {
+    width: 100%;
+  }
+
+  .botaoCatalogo,
+  .botaoLogin {
+    width: 100%;
+    min-height: 54px;
+    font-size: 1.0625rem;
+  }
+
+  .linkSobre {
+    margin-top: 22px;
+  }
+}

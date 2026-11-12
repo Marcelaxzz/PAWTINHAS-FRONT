@@ -1,0 +1,425 @@
+.perfil {
+  display: flex;
+  gap: 36px;
+  padding: 32px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 28px;
+  background: var(--cor-superficie);
+  box-shadow: 0 18px 36px -28px rgba(54, 36, 26, 0.45);
+}
+
+.foto {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border: 5px solid var(--cor-branco);
+  border-radius: 50%;
+  background: rgba(110, 77, 54, 0.08);
+  box-shadow: 0 14px 30px -16px rgba(54, 36, 26, 0.5);
+}
+
+.foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.semFoto {
+  width: 40%;
+  color: var(--cor-cafe);
+  opacity: 0.4;
+}
+
+.dados {
+  flex: 1;
+  min-width: 0;
+}
+
+.nomeLinha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+.nome {
+  font-family: var(--fonte-serifa);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px 24px;
+  margin: 20px 0 0;
+}
+
+.info dt {
+  font-size: var(--texto-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--cor-taupe);
+}
+
+.info dd {
+  margin: 2px 0 0;
+  font-weight: 600;
+  color: var(--cor-cafe-escuro);
+  overflow-wrap: anywhere;
+}
+
+.obs {
+  margin-top: 18px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--cor-caramelo);
+  border-radius: 0 12px 12px 0;
+  background: rgba(216, 161, 107, 0.1);
+  font-size: 0.9375rem;
+  color: var(--cor-taupe-escuro);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.historico {
+  padding: 28px 32px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 28px;
+  background: var(--cor-branco);
+}
+
+.subtitulo {
+  font-family: var(--fonte-serifa);
+  font-size: 1.375rem;
+  font-weight: 900;
+}
+
+.vazio {
+  margin-top: 12px;
+  color: var(--cor-taupe);
+}
+
+.linhaTempo {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.linhaTempo li {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.linhaTempo li:last-child {
+  border-bottom: 0;
+}
+
+.quando {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  min-width: 96px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--cor-cafe);
+  font-variant-numeric: tabular-nums;
+}
+
+.quando small {
+  font-weight: 500;
+  color: var(--cor-taupe);
+}
+
+.evento {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  flex: 1;
+  min-width: 0;
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 800px) {
+  .perfil {
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .foto {
+    width: 150px;
+    height: 150px;
+  }
+
+  .nomeLinha,
+  .acoes {
+    justify-content: center;
+  }
+
+  .info {
+    text-align: left;
+  }
+
+  .historico {
+    padding: 22px 18px;
+  }
+
+  .linhaTempo li {
+    flex-wrap: wrap;
+    gap: 8px 14px;
+  }
+}
+
+/* ---------- Tratamentos e alimentação ---------- */
+
+.cuidados {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.cuidado {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 26px 28px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 28px;
+  background: var(--cor-branco);
+}
+
+.cuidadoLargo {
+  grid-column: 1 / -1;
+}
+
+.cuidadoTopo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cuidadoTopo .subtitulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cuidadoTopo .subtitulo svg {
+  color: var(--cor-caramelo-escuro);
+}
+
+.cuidadoLista {
+  display: flex;
+  flex-direction: column;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cuidadoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.cuidadoItem:last-child {
+  border-bottom: 0;
+}
+
+.cuidadoLinha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.cuidadoNome {
+  font-weight: 700;
+  color: var(--cor-cafe-escuro);
+  overflow-wrap: anywhere;
+}
+
+.cuidadoDose {
+  font-size: var(--texto-sm);
+  font-weight: 600;
+  color: var(--cor-cafe);
+}
+
+.cuidadoApoio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9375rem;
+  color: var(--cor-taupe);
+}
+
+.cuidadoAlerta {
+  font-size: 0.9375rem;
+  color: var(--cor-erro);
+}
+
+.cuidadoAcoes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.cuidadoStatus select {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-creme-claro);
+  font-size: 0.9375rem;
+  color: var(--cor-cafe-escuro);
+}
+
+.cuidadoExcluir {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--cor-taupe);
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.cuidadoExcluir:hover {
+  background: var(--cor-erro-fundo);
+  color: var(--cor-erro);
+}
+
+.plano {
+  margin-top: 16px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: var(--cor-superficie);
+}
+
+.planoGramas {
+  font-family: var(--fonte-serifa);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--cor-cafe-escuro);
+}
+
+.planoGramas span {
+  margin-left: 4px;
+  font-family: var(--fonte-texto);
+  font-size: var(--texto-sm);
+  font-weight: 600;
+  color: var(--cor-taupe);
+}
+
+.planoDados {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px 16px;
+  margin: 14px 0 0;
+}
+
+.planoDados dt {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--cor-taupe);
+}
+
+.planoDados dd {
+  margin: 2px 0 0;
+  font-size: var(--texto-sm);
+  font-weight: 600;
+  color: var(--cor-cafe-escuro);
+  overflow-wrap: anywhere;
+}
+
+.planosAnteriores {
+  display: flex;
+  flex-direction: column;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.planosAnteriores li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 0.9375rem;
+  color: var(--cor-taupe-escuro);
+}
+
+.medicaoOrigem {
+  display: block;
+  font-size: var(--texto-xs);
+  color: var(--cor-taupe);
+}
+
+/* Celular: dados em duas colunas e botões da mesma largura, um por linha. */
+@media (max-width: 560px) {
+  .info {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 16px;
+  }
+
+  .infoLonga {
+    grid-column: 1 / -1;
+  }
+
+  .acoes {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .cuidados {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .cuidado {
+    padding: 22px 18px;
+  }
+}
+
+.medicaoModelo {
+  margin-left: auto;
+  font-size: var(--texto-xs);
+  font-weight: 700;
+  color: var(--cor-ferrugem);
+  white-space: nowrap;
+}

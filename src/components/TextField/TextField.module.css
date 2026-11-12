@@ -1,0 +1,118 @@
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--campo-gap-rotulo, 8px);
+}
+
+.rotulo {
+  font-size: var(--texto-sm);
+  font-weight: var(--campo-peso-rotulo, 700);
+  line-height: 1.3;
+  color: var(--campo-rotulo, var(--cor-taupe-escuro));
+}
+
+.caixa {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: var(--campo-altura, 44px);
+  padding: 0 16px 0 17px;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-campo);
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.caixa:hover {
+  border-color: var(--cor-borda-forte);
+}
+
+.caixa:focus-within {
+  border-color: var(--cor-caramelo);
+  background: var(--cor-branco);
+  box-shadow: var(--anel-foco);
+}
+
+.caixaErro,
+.caixaErro:focus-within {
+  border-color: var(--cor-erro);
+  box-shadow: 0 0 0 3px rgba(179, 38, 30, 0.12);
+}
+
+.icone {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  color: var(--campo-icone, var(--cor-taupe-escuro));
+}
+
+.entrada {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: var(--texto-base);
+  color: var(--campo-valor, var(--cor-cafe-escuro));
+  outline: none;
+}
+
+.entrada::placeholder {
+  color: var(--campo-placeholder, var(--cor-taupe));
+  opacity: 1;
+}
+
+.entrada[type='password']:not(:placeholder-shown) {
+  letter-spacing: 0.12em;
+}
+
+/* Remove o ícone nativo de revelar senha do Edge, já que temos o nosso. */
+.entrada::-ms-reveal,
+.entrada::-ms-clear {
+  display: none;
+}
+
+.entrada:-webkit-autofill {
+  -webkit-text-fill-color: var(--campo-valor, var(--cor-cafe-escuro));
+  box-shadow: 0 0 0 1000px var(--cor-superficie) inset;
+  transition: background-color 9999s ease-out;
+}
+
+.alternar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-right: -7px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--campo-icone, var(--cor-taupe-escuro));
+  transition: background-color 0.18s ease;
+}
+
+.alternar:hover {
+  background: rgba(137, 114, 96, 0.12);
+}
+
+.dica,
+.erro {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  margin-top: -2px;
+}
+
+.dica {
+  color: var(--cor-taupe);
+}
+
+.erro {
+  color: var(--cor-erro);
+  font-weight: 500;
+}

@@ -1,0 +1,65 @@
+.envolve {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.previa {
+  width: 100px;
+  height: 100px;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 8px 20px -12px rgba(54, 36, 26, 0.5);
+}
+
+.area {
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 140px;
+  padding: 20px;
+  border: 1.5px dashed var(--cor-borda);
+  border-radius: 18px;
+  background: var(--cor-superficie);
+  color: var(--cor-cafe);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.area:hover,
+.arrastando {
+  border-color: var(--cor-caramelo);
+  background: rgba(216, 161, 107, 0.1);
+}
+
+.area:focus-within {
+  outline: 3px solid var(--cor-caramelo);
+  outline-offset: 2px;
+}
+
+.comErro {
+  border-color: var(--cor-erro);
+}
+
+.area strong {
+  font-size: 0.9375rem;
+}
+
+.area span {
+  font-size: 0.9375rem;
+  color: var(--cor-taupe);
+}
+
+.erro {
+  flex-basis: 100%;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--cor-erro);
+}

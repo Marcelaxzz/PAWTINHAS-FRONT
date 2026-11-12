@@ -1,0 +1,69 @@
+/* Elementos compartilhados pelas telas de prótese 3D. */
+
+.paciente {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: center;
+  padding: 6px 16px 6px 6px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-branco);
+  font-size: var(--texto-sm);
+  font-weight: 600;
+  color: var(--cor-cafe-escuro);
+}
+
+.paciente img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.botaoPrimario,
+.botaoSecundario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 28px;
+  border-radius: 999px;
+  font-size: var(--texto-base);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.botaoPrimario {
+  border: 0;
+  background: var(--cor-cafe);
+  color: var(--cor-branco);
+  box-shadow: 0 12px 22px -14px rgba(54, 36, 26, 0.7);
+}
+
+.botaoPrimario:hover:not(:disabled) {
+  background: var(--cor-cafe-hover);
+  transform: translateY(-1px);
+}
+
+.botaoSecundario {
+  border: 1.5px solid var(--cor-cafe);
+  background: transparent;
+  color: var(--cor-cafe);
+}
+
+.botaoSecundario:hover:not(:disabled) {
+  background: rgba(110, 77, 54, 0.08);
+}
+
+.botaoPrimario:disabled,
+.botaoSecundario:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}

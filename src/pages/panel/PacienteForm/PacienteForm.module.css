@@ -1,0 +1,12 @@
+.foto {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.rotulo {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--cor-cafe-escuro);
+}

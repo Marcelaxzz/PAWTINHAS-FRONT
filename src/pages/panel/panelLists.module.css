@@ -1,0 +1,123 @@
+/* Estilos compartilhados pelas listas do painel. */
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.grade2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 18px;
+  background: var(--cor-branco);
+}
+
+.busca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 1 440px;
+  min-height: 50px;
+  padding: 0 18px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-creme-claro);
+  color: var(--cor-taupe);
+}
+
+.busca:focus-within {
+  border-color: var(--cor-caramelo);
+}
+
+.busca input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  font-size: var(--texto-base);
+  color: var(--cor-cafe-escuro);
+  outline: none;
+}
+
+.busca input::placeholder {
+  color: var(--cor-taupe);
+}
+
+.selectFiltro {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.selectFiltro select {
+  appearance: none;
+  min-height: 50px;
+  padding: 0 40px 0 18px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-creme-claro);
+  font-size: var(--texto-base);
+  color: var(--cor-cafe-escuro);
+  cursor: pointer;
+}
+
+.selectFiltro svg {
+  position: absolute;
+  right: 16px;
+  pointer-events: none;
+  color: var(--cor-cafe-escuro);
+}
+
+.filtroAcao {
+  margin-left: auto;
+}
+
+.decoracao {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.horario {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--cor-cafe);
+}
+
+.metaLinha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 2px;
+}
+
+@media (max-width: 900px) {
+  .grade2 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .busca {
+    flex: 1 1 100%;
+  }
+
+  .filtroAcao {
+    margin-left: 0;
+    width: 100%;
+  }
+}
