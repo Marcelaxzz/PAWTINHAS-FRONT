@@ -1,4 +1,3 @@
-import fs from 'node:fs'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -8,7 +7,7 @@ const securityHeaders = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Permissions-Policy': 'camera=(self), microphone=(), geolocation=(), payment=()',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
   'Cross-Origin-Opener-Policy': 'same-origin',
 }
 
@@ -53,10 +52,6 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), cspPlugin(env.VITE_API_URL)],
     server: {
       headers: securityHeaders,
-      // "npm run dev:celular": https com o certificado local, para a câmera de realidade aumentada.
-      https: process.env.PAWTINHAS_HTTPS
-        ? { key: fs.readFileSync('certificados/chave.pem'), cert: fs.readFileSync('certificados/certificado.pem') }
-        : undefined,
       // Em desenvolvimento a API (Pawtinhas-Back) fica atrás do mesmo endereço do site,
       // então os cookies de sessão são de primeira parte e não há CORS.
       proxy: { '/api': { target: env.VITE_API_PROXY || 'http://localhost:5135', changeOrigin: false } },

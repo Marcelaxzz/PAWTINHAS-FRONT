@@ -4,9 +4,6 @@ dist
 dist-ssr
 *.local
 
-# Certificado local do "npm run dev:celular"
-certificados
-
 # Variáveis de ambiente (nunca versionar segredos)
 .env
 .env.*
@@ -25,5 +22,7 @@ npm-debug.log*
 *.suo
 *.sw?
 
-# Gerado por scripts/copiar-opencv.mjs
-public/vendor/
+
+# Vercel (vercel link)
+.vercel
+.env*.local

@@ -306,3 +306,46 @@
     justify-content: center;
   }
 }
+
+/* Mensagem de interesse para colar no WhatsApp (quando o link é o do QR, que não leva texto). */
+.mensagem {
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: var(--texto-base);
+  line-height: 1.5;
+  color: var(--cor-branco);
+  user-select: all;
+}
+
+.contatoAcoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.copiar {
+  min-height: 46px;
+  margin-top: 18px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: var(--texto-base);
+  font-weight: 700;
+  color: var(--cor-branco);
+  cursor: pointer;
+}
+
+.copiar:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 560px) {
+  .copiar {
+    width: 100%;
+  }
+}

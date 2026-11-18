@@ -45,63 +45,6 @@ A área de adoção é pública e não exige conta. Para trocar a senha, use "Es
 Variáveis em `.env.local` (veja `.env.example`): `VITE_API_URL` (padrão `/api`), `VITE_API_PROXY` e `VITE_WHATSAPP`
 (sem um número válido, os botões de WhatsApp da área de adoção ficam ocultos).
 
-### Medição para prótese 3D
-
-A medição é feita sobre uma foto do membro com um **cartão de tamanho padrão** (85,60 × 53,98 mm, o de banco ou
-plano de saúde) encostado nele. A visão computacional roda no navegador com **OpenCV.js** (`@techstark/opencv-js`):
-
-1. **Acha o cartão:** bordas de Canny em cores, retas de Hough e contornos. Cada quadrilátero candidato é conferido
-   contra o gradiente da foto: um lado só conta se tiver borda forte na direção certa, o que descarta o pelo.
-   Os candidatos saem em ordem e a tela deixa trocar de contorno ou marcar os 4 cantos à mão.
-2. **Acerta os cantos:** na foto inteira, ajusta uma reta a cada lado (borda em subpixel, pontos fora descartados)
-   e cruza as retas.
-3. **Corrige a perspectiva:** uma homografia leva a foto para o plano do cartão, em centímetros
-   (`visao/geometria.js`). A distância entre os dois pontos de cada medida sai direto em cm.
-4. **Encaixa nas bordas:** opcional, leva as pontas da medida até a borda mais nítida ao longo da linha.
-
-Sem cartão, dá para usar uma régua ou fita aparecendo na foto (dois pontos e a distância entre eles). Cada leitura
-entra numa tabela; a ficha recebe a média, o membro medido, o método e o número de leituras. Leituras que variam
-mais de 0,5 cm (ou 5%) geram aviso.
-
-Em teste com foto sintética (cartão em perspectiva, medidas conhecidas), a medição deu 22,0 / 15,0 / 5,0 cm para
-22 / 15 / 5 cm reais. A foto não sai do navegador: só os números vão para a API.
-
-O OpenCV.js roda num **Web Worker** isolado (`visao/visao-worker.js`), sem acesso à página, aos cookies ou à rede.
-O arquivo do OpenCV é servido num endereço fixo, `/vendor/opencv.js`, copiado de `node_modules` por
-`scripts/copiar-opencv.mjs` antes do `dev` e do `build`. O app mobile carrega o mesmo arquivo.
-Ele precisa compilar WebAssembly, então o arquivo do worker recebe uma CSP própria (veja Produção); a página
-continua com a CSP restrita, sem `unsafe-eval`.
-
-O navegador só libera a câmera em `https` ou em `localhost`. Pelo endereço da rede local (`http://192.168...`) a
-câmera fica bloqueada; nesse caso use **Enviar foto** com uma foto tirada no celular.
-
-### Modelo para impressão 3D
-
-Em `/protese-3d/modelo` a medição salva vira uma prótese paramétrica (`impressao/modeloProtese.js`), de baixo para
-cima:
-
-| Peça                  | Dimensão                                                                                |
-| --------------------- | --------------------------------------------------------------------------------------- |
-| Base (apoio no chão)  | diâmetro = largura da pata, 8 mm de altura                                              |
-| Haste                 | diâmetro = 30% do diâmetro externo do soquete (mínimo 12 mm)                            |
-| Cone de 45°           | liga a haste ao soquete e dispensa suporte na impressão                                 |
-| Soquete (copo aberto) | diâmetro interno = largura no encaixe + folga; o fundo fica na altura medida até o chão |
-
-Folga, parede (mínimo 1,2 mm), profundidade do soquete (padrão 1,2 × o diâmetro) e material (PLA, PETG ou TPU)
-são ajustáveis. A tela mostra a peça em 3D (arraste para inclinar, `impressao/vista3d.js`) ou em corte com as cotas.
-Ela também mostra a massa e os metros de filamento de 1,75 mm, pela densidade da ficha técnica do material.
-
-**Baixar arquivo STL** gera um STL binário com 1.440 triângulos, em milímetros, com z = 0 no chão. As 4 peças são
-sólidos fechados com normais para fora (conferido com trimesh), e o fatiador une as partes sobrepostas.
-
-Para imprimir:
-
-1. Abra o arquivo no fatiador (PrusaSlicer, Cura, Bambu Studio...).
-2. Deixe a peça de pé, com a base no prato.
-3. Escolha preenchimento e material, fatie e envie o G-code para a impressora.
-
-Confira o encaixe no animal antes do uso definitivo.
-
 ## Rotas
 
 **Públicas**
@@ -136,9 +79,6 @@ Confira o encaixe no animal antes do uso definitivo.
 | `/configuracoes`                                     | Configurações                          |
 | `/calculadoras/dose`, `/calculadoras/racao`          | Dose de medicamento e cálculo de ração |
 | `/calculadoras/medicamentos`, `/calculadoras/racoes` | Catálogos usados pelas calculadoras    |
-| `/protese-3d`, `/protese-3d/medicao`                 | Câmera e medição para prótese 3D       |
-| `/protese-3d/modelo`                                 | Modelo para impressão 3D (arquivo STL) |
-| `/protese-3d/como-funciona`, `/protese-3d/suporte`   | Como funciona / Suporte                |
 | `/admin/adocoes`                                     | Gerenciamento de adoções               |
 | `/admin/adocoes/novo`                                | Cadastrar novo animal                  |
 | `/admin/adocoes/:id/editar`                          | Editar animal (modal)                  |
@@ -159,7 +99,7 @@ src/
 ├── context/           Sessão (AuthProvider) e avisos (ToastProvider)
 ├── hooks/             useAuth, useCollections, useClinic, useFavorites, useToast…
 ├── layouts/           Acesso (Auth), Painel, Adoção e estrutura padrão das páginas (Page)
-├── pages/             auth/, panel/, protese/, adocao/, admin/, uma pasta por tela
+├── pages/             auth/, panel/, adocao/, admin/, uma pasta por tela
 ├── routes/            PrivateRoute e GuestRoute
 ├── services/          Cliente HTTP (CSRF + renovação de sessão), autenticação e CRUD de dados
 ├── styles/global.css  Paleta, fontes e reset
@@ -177,8 +117,6 @@ src/
 - **Lista de campos permitidos por recurso** (`services/resources.js`): propriedades inesperadas são descartadas antes de salvar.
 - **Uploads de imagem validados:** tipo, tamanho (5 MB) e assinatura binária do arquivo; a imagem é
   re-codificada (remove metadados EXIF). Links de imagem só são aceitos com `https://`; fotos enviadas ficam na API (`/api/arquivos/…`).
-- **Câmera** usada só durante a medição e desligada ao capturar ou sair da tela; a foto fica só na memória da aba.
-- **OpenCV isolado** num Web Worker com CSP própria e `connect-src 'none'`: recebe pixels, devolve coordenadas.
 - **Sem enumeração de usuários** no login e na redefinição de senha.
 - **Política de senha forte** e `autocomplete` corretos para gerenciadores de senha.
 - **Content-Security-Policy** restritiva no build (sem scripts inline nem origens externas),
@@ -198,33 +136,26 @@ Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 X-Frame-Options: DENY
 X-Content-Type-Options: nosniff
 Referrer-Policy: strict-origin-when-cross-origin
-Permissions-Policy: camera=(self), microphone=(), geolocation=(), payment=()
-```
-
-E, **só** para os arquivos `assets/visao-worker-*.js` (o worker da medição):
-
-```
-Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval'; connect-src 'none'
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
 ```
 
 Quando a API serve o site, ela já envia esses cabeçalhos.
 
-### Railway
+### Vercel
 
-O `Dockerfile` deste repositório monta o site e o entrega pelo Caddy (`Caddyfile`). O Caddy aplica os cabeçalhos acima, manda as rotas do React para o `index.html` e repassa `/api` para a API pela rede interna do Railway. Assim, site e API ficam no mesmo domínio.
+O site fica na Vercel: **https://pawtinhas.vercel.app**. O `vercel.json` deste repositório faz o build com o Vite,
+manda as rotas do React para o `index.html`, aplica os cabeçalhos acima e **repassa `/api` para a API no Railway**
+(`https://api-production-68c6ec4d.up.railway.app`). Para o navegador, site e API ficam no mesmo domínio, e os cookies
+de sessão (SameSite=Strict) funcionam.
 
-1. Suba primeiro o MySQL e a API (seção "Publicar no Railway" do README do Back).
-2. _New_ > _GitHub Repo_ > `PAWTINHAS-FRONT`. Em _Variables_:
+Para publicar uma nova versão:
 
-   | Variável        | Valor                                                                                                          |
-   | --------------- | -------------------------------------------------------------------------------------------------------------- |
-   | `API_INTERNA`   | `http://${{PAWTINHAS-BACK.RAILWAY_PRIVATE_DOMAIN}}:8080` (troque `PAWTINHAS-BACK` pelo nome do serviço da API) |
-   | `VITE_WHATSAPP` | WhatsApp da clínica, só dígitos (opcional)                                                                     |
-   | `PORT`          | `8080`                                                                                                         |
+```bash
+npx vercel deploy --prod
+```
 
-3. Em _Settings_ > _Networking_, gere o domínio público, com a porta **8080**. É esse endereço que vai em `Frontend__Url` na API e em `EXPO_PUBLIC_API_URL` / `EXPO_PUBLIC_SITE_URL` no app.
-
-A medição da prótese pela câmera precisa de https, e o domínio do Railway já tem.
+Se a API mudar de endereço, troque o destino de `/api/:caminho*` no `vercel.json`. Na API, `Frontend__Url` deve ser
+o endereço do site e `ProxyReverso__Saltos` deve ser `2` (Vercel e Railway na frente dela).
 
 ## API consumida
 
@@ -253,7 +184,7 @@ traduz cada um para os contratos da API da equipe:
 | `consultas`, `vacinas`, `cirurgias`, `banhos`, `visitas`, `emergencias` | `/api/eventos?tipo=...` (status em `PATCH /api/eventos/{id}/status`) |
 | `animais` (adoção)                                                      | `/api/adocao` (listagem e detalhe públicos)                          |
 | `alarmes`, `historicoAlarmes`                                           | `/api/alarmes`, `/api/alarmes/historico`                             |
-| `medicoes`, `medicamentos`, `racoes`, `profissionais`, `configuracoes`  | rotas com o mesmo nome                                               |
+| `medicamentos`, `racoes`, `profissionais`, `configuracoes`              | rotas com o mesmo nome                                               |
 | `prescricoes`, `planosAlimentares`                                      | `/api/prescricoes`, `/api/planos-alimentares`                        |
 
 O adaptador converte ids (texto na tela, número na API), junta data e hora em `dataHora`, envia fotos para

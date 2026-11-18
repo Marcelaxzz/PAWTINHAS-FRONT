@@ -75,17 +75,6 @@ export const RESOURCE_FIELDS = {
     'castrado',
     'necessidades',
   ],
-  medicoes: [
-    'petId',
-    'membro',
-    'comprimentoMembro',
-    'alturaChao',
-    'larguraPata',
-    'larguraEncaixe',
-    'metodo',
-    'leituras',
-    'criadoEm',
-  ],
   medicamentos: [
     'nome',
     'principioAtivo',

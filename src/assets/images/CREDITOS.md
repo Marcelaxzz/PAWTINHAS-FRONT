@@ -1,14 +1,4 @@
-# Fotos de animais do site
-
-Fotos reais do Wikimedia Commons, em domínio público (CC0).
-
-| Arquivo               | Origem                                                                                                                                                                                                                                                                                               | Licença |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| boas-vindas-cao.webp  | [Border collie lying on the grass.jpg](https://commons.wikimedia.org/wiki/File:Border_collie_lying_on_the_grass.jpg)                                                                                                                                                                                 | CC0     |
-| boas-vindas-gato.webp | [Young tabby cat keeping watch.jpg](https://commons.wikimedia.org/wiki/File:Young_tabby_cat_keeping_watch.jpg)                                                                                                                                                                                       | CC0     |
-| entrar-gato.webp      | [Pegeia, Cyprus, cat lying on blue wooden table in olive tre shade, with white and blue Orthodox church in the background.jpg](https://commons.wikimedia.org/wiki/File:Pegeia,_Cyprus,_cat_lying_on_blue_wooden_table_in_olive_tre_shade,_with_white_and_blue_Orthodox_church_in_the_background.jpg) | CC0     |
-| inicio-gato.webp      | [Brindle cat on roof (2020; cropped 2025).jpg](<https://commons.wikimedia.org/wiki/File:Brindle_cat_on_roof_(2020;_cropped_2025).jpg>)                                                                                                                                                               | CC0     |
-| medicao-cao.webp      | [Boxer dog posing on the grass.jpg](https://commons.wikimedia.org/wiki/File:Boxer_dog_posing_on_the_grass.jpg)                                                                                                                                                                                       | CC0     |
+# Créditos das fotos
 
 ## Rações (foto da embalagem quando a ração não tem foto própria)
 
@@ -29,28 +19,6 @@ Fotos de embalagens reais tiradas por colaboradores do [Open Pet Food Facts](htt
 | racao-granplus-gatos.webp        | Gran Plus Menu gatos adultos          | [7896048915924](https://world.openpetfoodfacts.org/product/7896048915924) |
 | racao-quatree-gatos.webp         | Quatree Gourmet gatos castrados       | [7898256301940](https://world.openpetfoodfacts.org/product/7898256301940) |
 | racao-pedigree-sache.webp        | Pedigree High Protein sachê           | [7506174515089](https://world.openpetfoodfacts.org/product/7506174515089) |
-
-## Medicamentos: caixas (escolhidas pelo princípio ativo)
-
-Fotos de colaboradores do Open Products Facts e do Open Food Facts, licença CC BY-SA 3.0, recortadas rente à caixa. As marcas são dos fabricantes.
-
-| Arquivo                   | Produto                                          | Origem                                                                     |
-| ------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------- |
-| remedio-amoxicilina.webp  | Amoxicilina + clavulanato de potássio (genérico) | [1292426923806](https://world.openproductsfacts.org/product/1292426923806) |
-| remedio-meloxicam.webp    | Maxicam solução oral (Ourofino)                  | [7898019869618](https://world.openproductsfacts.org/product/7898019869618) |
-| remedio-dipirona.webp     | Dipirona 500 mg/mL gotas (EMS)                   | [9599460715841](https://world.openproductsfacts.org/product/9599460715841) |
-| remedio-omeprazol.webp    | Omeprazol 20 mg (Pharmalife)                     | [7501277092765](https://world.openfoodfacts.org/product/7501277092765)     |
-| remedio-metronidazol.webp | Amibazol (metronidazol suspensão)                | [8846000180036](https://world.openproductsfacts.org/product/8846000180036) |
-
-## Medicamentos: apresentação (quando a caixa do remédio não está na lista)
-
-| Arquivo                 | Origem                                                                                                   | Autor       | Licença      |
-| ----------------------- | -------------------------------------------------------------------------------------------------------- | ----------- | ------------ |
-| remedio-comprimido.webp | [Blister of tablets.jpg](https://commons.wikimedia.org/wiki/File:Blister_of_tablets.jpg)                 | Tarasna0922 | CC BY-SA 4.0 |
-| remedio-capsula.webp    | [Drug capsules.jpg](https://commons.wikimedia.org/wiki/File:Drug_capsules.jpg)                           | Beendy234   | CC BY 4.0    |
-| remedio-gotas.webp      | [Drop counter and vial.JPG](https://commons.wikimedia.org/wiki/File:Drop_counter_and_vial.JPG)           | Cjp24       | CC BY-SA 3.0 |
-| remedio-oral.webp       | [Baxa syringe.jpg](https://commons.wikimedia.org/wiki/File:Baxa_syringe.jpg)                             | 多多123     | CC BY 4.0    |
-| remedio-injetavel.webp  | [Hydroxocobalamin Injection.jpg](https://commons.wikimedia.org/wiki/File:Hydroxocobalamin_Injection.jpg) | Sbharris    | CC BY-SA 3.0 |
 
 ## Materiais (escolhidos pelo nome ou pelo tipo)
 

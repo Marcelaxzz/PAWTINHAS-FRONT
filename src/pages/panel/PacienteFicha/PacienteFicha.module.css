@@ -205,10 +205,6 @@
   background: var(--cor-branco);
 }
 
-.cuidadoLargo {
-  grid-column: 1 / -1;
-}
-
 .cuidadoTopo {
   display: flex;
   flex-wrap: wrap;
@@ -380,12 +376,6 @@
   color: var(--cor-taupe-escuro);
 }
 
-.medicaoOrigem {
-  display: block;
-  font-size: var(--texto-xs);
-  color: var(--cor-taupe);
-}
-
 /* Celular: dados em duas colunas e botões da mesma largura, um por linha. */
 @media (max-width: 560px) {
   .info {
@@ -414,12 +404,4 @@
   .cuidado {
     padding: 22px 18px;
   }
-}
-
-.medicaoModelo {
-  margin-left: auto;
-  font-size: var(--texto-xs);
-  font-weight: 700;
-  color: var(--cor-ferrugem);
-  white-space: nowrap;
 }

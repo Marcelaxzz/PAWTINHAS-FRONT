@@ -12,7 +12,7 @@ import { formatNumber, intervaloCurto, intervaloLabel, maskDecimal, parseDecimal
 import { CALCULADORAS_TABS } from '../calculadorasTabs.js'
 import { CATEGORIA } from '../../../services/gestaoService.js'
 import { CartaoCatalogo } from './CartaoCatalogo.jsx'
-import { fotoDoMedicamento } from './fotosCatalogo.js'
+import { CaixaRemedio } from './CaixaRemedio.jsx'
 import { HistoricoDialog, MovimentoDialog, PainelEstoque, ResumoEstoque } from './Estoque.jsx'
 import { FILTROS_ESTOQUE, useEstoque } from './estoque.js'
 import styles from '../Calculadoras.module.css'
@@ -96,7 +96,7 @@ export function CatalogoMedicamentos() {
                 .map((m) => (
                   <CartaoCatalogo
                     key={m.id}
-                    foto={fotoDoMedicamento(m)}
+                    ilustracao={<CaixaRemedio medicamento={m} />}
                     etiquetas={[m.forma]}
                     titulo={m.nome}
                     estoque={estoque.itens?.[m.id]}

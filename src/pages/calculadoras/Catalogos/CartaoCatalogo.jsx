@@ -7,10 +7,11 @@ import styles from './CartaoCatalogo.module.css'
  * Cartão dos catálogos (rações, medicamentos e materiais): a foto real do produto na lateral, o nome,
  * o número que mais importa (quando houver) e o estoque. O resto fica em "Ver detalhes".
  * ajuste "inteira" mostra a embalagem toda (rações e caixas de remédio); "preenche" cobre o espaço
- * (fotos de materiais, que têm fundo).
+ * (fotos de materiais, que têm fundo). `ilustracao` troca a foto por um desenho (caixa do remédio).
  */
 export function CartaoCatalogo({
   foto,
+  ilustracao,
   ajuste = 'inteira',
   etiquetas = [],
   titulo,
@@ -28,7 +29,7 @@ export function CartaoCatalogo({
         onClick={onDetalhes}
         aria-label={`Ver detalhes de ${titulo}`}
       >
-        <img src={foto} alt="" loading="lazy" />
+        {ilustracao ?? <img src={foto} alt="" loading="lazy" />}
       </button>
 
       <div className={styles.corpo}>

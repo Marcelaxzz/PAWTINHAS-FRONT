@@ -51,15 +51,6 @@ const CatalogoMateriais = page(
   'CatalogoMateriais',
 )
 
-// Prótese 3D
-const ProteseMedicao = page(() => import('./pages/protese/ProteseMedicao/ProteseMedicao.jsx'), 'ProteseMedicao')
-const ProteseComoFunciona = page(
-  () => import('./pages/protese/ProteseComoFunciona/ProteseComoFunciona.jsx'),
-  'ProteseComoFunciona',
-)
-const ProteseSuporte = page(() => import('./pages/protese/ProteseSuporte/ProteseSuporte.jsx'), 'ProteseSuporte')
-const ProteseModelo = page(() => import('./pages/protese/ProteseModelo/ProteseModelo.jsx'), 'ProteseModelo')
-
 // Adoção (pública)
 const AdocaoLayout = page(() => import('./layouts/AdocaoLayout/AdocaoLayout.jsx'), 'AdocaoLayout')
 const Catalogo = page(() => import('./pages/adocao/Catalogo/Catalogo.jsx'), 'Catalogo')
@@ -138,11 +129,6 @@ export function App() {
                   <Route path="/calculadoras/medicamentos" element={<CatalogoMedicamentos />} />
                   <Route path="/calculadoras/racoes" element={<CatalogoRacoes />} />
                   <Route path="/calculadoras/materiais" element={<CatalogoMateriais />} />
-                  <Route path="/protese-3d" element={<ProteseMedicao />} />
-                  <Route path="/protese-3d/medicao" element={<ProteseMedicao />} />
-                  <Route path="/protese-3d/modelo" element={<ProteseModelo />} />
-                  <Route path="/protese-3d/como-funciona" element={<ProteseComoFunciona />} />
-                  <Route path="/protese-3d/suporte" element={<ProteseSuporte />} />
                   <Route path="/admin/adocoes" element={<AdminAdocoes />} />
                   <Route path="/admin/adocoes/novo" element={<NovoAnimal />} />
                   <Route path="/admin/adocoes/:id/editar" element={<AdminAdocoes />} />

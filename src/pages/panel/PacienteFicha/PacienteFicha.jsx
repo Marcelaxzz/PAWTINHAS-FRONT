@@ -5,21 +5,14 @@ import { Chip, StatusChip } from '../../../components/ui/Chip.jsx'
 import { PillButton } from '../../../components/ui/PillButton.jsx'
 import { ConfirmDialog } from '../../../components/ui/Dialog.jsx'
 import { EmptyState, ErrorState, LoadingState } from '../../../components/ui/States.jsx'
-import {
-  DownloadIcon,
-  PawOutline,
-  PencilIcon,
-  PillIcon,
-  RulerIcon,
-  TrashIcon,
-} from '../../../components/Icons/Icons.jsx'
+import { DownloadIcon, PawOutline, PencilIcon, PillIcon, TrashIcon } from '../../../components/Icons/Icons.jsx'
 import { useClinic } from '../../../hooks/useClinic.js'
 import { useToast } from '../../../hooks/useToast.js'
 import { dataService } from '../../../services/dataService.js'
 import { relatoriosService } from '../../../services/gestaoService.js'
 import { formatDateBr } from '../../../utils/dates.js'
 import { formatNumber, formatQuantidade } from '../../../utils/numbers.js'
-import { Alimentacao, Medicoes, Tratamentos } from './CuidadosPaciente.jsx'
+import { Alimentacao, Tratamentos } from './CuidadosPaciente.jsx'
 import styles from './PacienteFicha.module.css'
 
 const HISTORY = [
@@ -29,7 +22,6 @@ const HISTORY = [
   'banhos',
   'visitas',
   'emergencias',
-  'medicoes',
   'prescricoes',
   'planosAlimentares',
 ]
@@ -76,15 +68,6 @@ function historyOf(data, petId) {
     ...data.emergencias
       .filter((x) => x.petId === petId)
       .map((x) => ({ id: x.id, data: x.data, hora: x.hora, tipo: 'Emergência', texto: x.motivo, status: x.status })),
-    ...data.medicoes
-      .filter((x) => x.petId === petId)
-      .map((x) => ({
-        id: x.id,
-        data: x.criadoEm.slice(0, 10),
-        hora: x.criadoEm.slice(11, 16),
-        tipo: 'Prótese 3D',
-        texto: `Membro ${formatNumber(x.comprimentoMembro, 1)} cm · Altura ${formatNumber(x.alturaChao, 1)} cm · Pata ${formatNumber(x.larguraPata, 1)} cm`,
-      })),
     ...data.prescricoes
       .filter((x) => x.petId === petId)
       .map((x) => ({
@@ -213,10 +196,6 @@ export function PacienteFicha() {
               <PillIcon size={15} />
               Calcular dose
             </PillButton>
-            <PillButton variant="contorno" to={`/protese-3d?pet=${encodeURIComponent(pet.id)}`}>
-              <RulerIcon size={15} />
-              Medir prótese 3D
-            </PillButton>
             <PillButton variant="contorno" onClick={baixarFicha} loading={baixando}>
               <DownloadIcon size={15} />
               Ficha em PDF
@@ -240,7 +219,6 @@ export function PacienteFicha() {
           planos={data.planosAlimentares.filter((p) => p.petId === pet.id)}
           patchLocal={patchLocal}
         />
-        <Medicoes pet={pet} medicoes={data.medicoes.filter((m) => m.petId === pet.id)} patchLocal={patchLocal} />
       </div>
 
       <section className={styles.historico} aria-labelledby="titulo-historico">

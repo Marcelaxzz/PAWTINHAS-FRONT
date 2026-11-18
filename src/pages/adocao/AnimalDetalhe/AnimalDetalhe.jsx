@@ -14,8 +14,9 @@ import { Page } from '../../../layouts/Page/Page.jsx'
 import { useFavorites } from '../../../hooks/useFavorites.js'
 import { dataService } from '../../../services/dataService.js'
 import { photoSrc } from '../../../utils/images.js'
-import { whatsappLink } from '../../../config.js'
-import { categoria } from '../../../utils/adocao.js'
+import { whatsappLevaMensagem, whatsappLink } from '../../../config.js'
+import { categoria, mensagemInteresse } from '../../../utils/adocao.js'
+import { useToast } from '../../../hooks/useToast.js'
 import styles from './AnimalDetalhe.module.css'
 
 const STATUS_TEXTO = {
@@ -27,6 +28,8 @@ const STATUS_TEXTO = {
 export function AnimalDetalhe() {
   const { id } = useParams()
   const [state, setState] = useState({ id: null, animal: null, error: '' })
+  const [copiada, setCopiada] = useState(false)
+  const toast = useToast()
   const { isFavorite, toggle } = useFavorites()
 
   useEffect(() => {
@@ -59,7 +62,19 @@ export function AnimalDetalhe() {
 
   const foto = photoSrc(animal.foto)
   const favorito = isFavorite(animal.id)
-  const whatsapp = whatsappLink(`Olá! Vi ${animal.nome} no Pawtinhas e gostaria de saber mais sobre a adoção.`)
+  const mensagem = mensagemInteresse(animal)
+  const whatsapp = whatsappLink(mensagem)
+
+  // O link do QR não leva texto: a mensagem vai para a área de transferência, pronta para colar.
+  const copiar = async (indoParaWhatsapp) => {
+    try {
+      await navigator.clipboard.writeText(mensagem)
+      setCopiada(true)
+      toast.success(indoParaWhatsapp ? 'Mensagem copiada: é só colar no WhatsApp.' : 'Mensagem copiada!')
+    } catch {
+      if (!indoParaWhatsapp) toast.error('Não deu para copiar. Selecione a mensagem e copie.')
+    }
+  }
   const infos = [
     { label: 'Idade', value: animal.idade, icon: <CakeIcon size={26} strokeWidth={1.6} /> },
     { label: 'Sexo', value: animal.sexo, icon: <GenderIcon sexo={animal.sexo} size={26} strokeWidth={1.6} /> },
@@ -93,12 +108,28 @@ export function AnimalDetalhe() {
             <section className={styles.contato} aria-labelledby="titulo-contato">
               <h2 id="titulo-contato">Quer saber mais sobre {animal.nome}?</h2>
               <p>
-                Entre em contato pelo WhatsApp para tirar dúvidas, conhecer o animal e entender o processo de adoção.
+                {whatsappLevaMensagem
+                  ? 'Mande uma mensagem pelo WhatsApp: ela já vai escrita, é só enviar.'
+                  : 'Copie a mensagem abaixo e cole na conversa do WhatsApp da clínica.'}
               </p>
-              <a className={styles.whatsapp} href={whatsapp} target="_blank" rel="noopener noreferrer">
-                <WhatsAppIcon size={22} />
-                Ir para o WhatsApp
-              </a>
+              {!whatsappLevaMensagem && <blockquote className={styles.mensagem}>{mensagem}</blockquote>}
+              <div className={styles.contatoAcoes}>
+                <a
+                  className={styles.whatsapp}
+                  href={whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => !whatsappLevaMensagem && copiar(true)}
+                >
+                  <WhatsAppIcon size={22} />
+                  Ir para o WhatsApp
+                </a>
+                {!whatsappLevaMensagem && (
+                  <button type="button" className={styles.copiar} onClick={() => copiar(false)}>
+                    {copiada ? 'Mensagem copiada!' : 'Copiar mensagem'}
+                  </button>
+                )}
+              </div>
             </section>
           ) : (
             // Sem WhatsApp configurado, o visitante ainda tem um próximo passo.

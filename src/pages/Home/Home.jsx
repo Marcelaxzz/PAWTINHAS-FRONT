@@ -9,7 +9,6 @@ import {
   HeartIcon,
   PillIcon,
   PlusIcon,
-  RulerIcon,
   StethoscopeIcon,
   UsersIcon,
 } from '../../components/Icons/Icons.jsx'
@@ -30,7 +29,7 @@ const ICONES = { agenda: CalendarIcon, emergencias: AlertIcon, pacientes: UsersI
 const ATALHOS = [
   { to: '/agenda/consultas/nova', rotulo: 'Nova consulta', icone: StethoscopeIcon },
   { to: '/pacientes/novo', rotulo: 'Novo paciente', icone: PlusIcon },
-  { to: '/protese-3d', rotulo: 'Medir prótese', icone: RulerIcon },
+  { to: '/alarmes/novo', rotulo: 'Novo alarme', icone: ClockIcon },
   { to: '/calculadoras/dose', rotulo: 'Calcular dose', icone: PillIcon },
 ]
 

@@ -4,11 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/copiar-opencv.mjs",
     "dev": "vite",
-    "predev:celular": "node scripts/copiar-opencv.mjs",
-    "dev:celular": "node scripts/dev-celular.mjs",
-    "prebuild": "node scripts/copiar-opencv.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint .",
@@ -17,7 +13,6 @@
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.3.0",
     "@fontsource-variable/lexend": "^5.3.0",
-    "@techstark/opencv-js": "4.12.0-release.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router-dom": "^7.18.4"

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ConfirmDialog } from '../../../components/ui/Dialog.jsx'
 import { PillButton } from '../../../components/ui/PillButton.jsx'
 import { StatusChip } from '../../../components/ui/Chip.jsx'
-import { BowlIcon, ChipIcon, PillIcon, RulerIcon, TrashIcon } from '../../../components/Icons/Icons.jsx'
+import { BowlIcon, ChipIcon, PillIcon, TrashIcon } from '../../../components/Icons/Icons.jsx'
 import { useToast } from '../../../hooks/useToast.js'
 import { dataService } from '../../../services/dataService.js'
 import { addDaysIso, formatDateBr, todayIso } from '../../../utils/dates.js'
@@ -245,87 +245,6 @@ export function Alimentacao({ pet, planos, patchLocal }) {
         loading={ocupado}
         title="Excluir plano alimentar?"
         message="O cálculo será removido do histórico do paciente."
-        confirmLabel="Excluir"
-      />
-    </section>
-  )
-}
-
-const medidasTexto = (m) =>
-  `Membro ${formatNumber(m.comprimentoMembro, 1)} cm · Altura ${formatNumber(m.alturaChao, 1)} cm · Pata ${formatNumber(m.larguraPata, 1)} cm` +
-  (m.larguraEncaixe ? ` · Encaixe ${formatNumber(m.larguraEncaixe, 1)} cm` : '')
-
-const origemTexto = (m) =>
-  [m.membro, m.metodo, m.leituras > 1 ? `média de ${m.leituras} leituras` : null].filter(Boolean).join(' · ')
-
-export function Medicoes({ pet, medicoes, patchLocal }) {
-  const toast = useToast()
-  const [excluindo, setExcluindo] = useState(null)
-  const [ocupado, setOcupado] = useState(false)
-  const lista = [...medicoes].sort((a, b) => b.criadoEm.localeCompare(a.criadoEm))
-
-  const excluir = async () => {
-    setOcupado(true)
-    try {
-      await dataService.remove('medicoes', excluindo.id)
-      patchLocal('medicoes', excluindo, 'remove')
-      toast.success('Medição excluída.')
-      setExcluindo(null)
-    } catch (err) {
-      toast.error(err.message)
-    } finally {
-      setOcupado(false)
-    }
-  }
-
-  return (
-    <section className={`${styles.cuidado} ${styles.cuidadoLargo}`} aria-labelledby="titulo-medicoes">
-      <header className={styles.cuidadoTopo}>
-        <h2 id="titulo-medicoes" className={styles.subtitulo}>
-          <RulerIcon size={20} /> Prótese 3D
-        </h2>
-        <PillButton size="sm" to={`/protese-3d/medicao?pet=${encodeURIComponent(pet.id)}`}>
-          Nova medição
-        </PillButton>
-      </header>
-
-      {lista.length === 0 ? (
-        <p className={styles.vazio}>Nenhuma medição registrada.</p>
-      ) : (
-        <ul className={styles.planosAnteriores}>
-          {lista.map((m, index) => (
-            <li key={m.id}>
-              <span>
-                {formatDateBr(m.criadoEm.slice(0, 10))} às {m.criadoEm.slice(11, 16)} · {medidasTexto(m)}
-                {index === 0 && lista.length > 1 && ' (mais recente)'}
-                {origemTexto(m) && <small className={styles.medicaoOrigem}>{origemTexto(m)}</small>}
-              </span>
-              <Link
-                className={styles.medicaoModelo}
-                to={`/protese-3d/modelo?pet=${encodeURIComponent(pet.id)}&medicao=${encodeURIComponent(m.id)}`}
-              >
-                Modelo 3D
-              </Link>
-              <button
-                type="button"
-                className={styles.cuidadoExcluir}
-                onClick={() => setExcluindo(m)}
-                aria-label={`Excluir medição de ${formatDateBr(m.criadoEm.slice(0, 10))}`}
-              >
-                <TrashIcon size={15} />
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      <ConfirmDialog
-        open={Boolean(excluindo)}
-        onClose={() => setExcluindo(null)}
-        onConfirm={excluir}
-        loading={ocupado}
-        title="Excluir medição?"
-        message="As medidas serão removidas da ficha e do histórico do paciente."
         confirmLabel="Excluir"
       />
     </section>
