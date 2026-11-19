@@ -9,8 +9,8 @@ As fontes (Lexend e Fraunces) são instaladas pelo npm e servidas pelo próprio 
 O app para celular (**Pawtinhas-Mobile**, Expo) reaproveita os módulos deste site que não dependem do navegador:
 
 - contratos da API e validações;
-- agenda e geometria da medição;
-- gerador do STL, formulários, ícones e imagens.
+- regras da agenda e cálculos de dose e ração;
+- formulários, ícones e imagens.
 
 Ao mudar algo aqui, rode `npm run sincronizar` no app (o `npm start` dele já faz isso). Veja o README do Pawtinhas-Mobile.
 

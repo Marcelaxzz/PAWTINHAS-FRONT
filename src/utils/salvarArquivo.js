@@ -1,5 +1,5 @@
 /**
- * Baixa um arquivo gerado no navegador (PDF dos relatórios, backup, STL).
+ * Baixa um arquivo gerado no navegador (PDF dos relatórios e backup).
  * No app mobile este módulo é trocado por src/plataforma/salvarArquivo (abre o compartilhamento).
  */
 export async function salvarArquivo(conteudo, nome, tipo = 'application/octet-stream') {
