@@ -20,15 +20,6 @@
   color: var(--cor-taupe);
 }
 
-.foto {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 462 / 344;
-  border-radius: var(--raio-lg);
-  object-fit: cover;
-  box-shadow: 0 24px 44px -30px rgba(54, 36, 26, 0.55);
-}
-
 .cartoes {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

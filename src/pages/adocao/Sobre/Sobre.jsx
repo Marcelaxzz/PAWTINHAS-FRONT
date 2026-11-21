@@ -1,5 +1,5 @@
 import { Page } from '../../../layouts/Page/Page.jsx'
-import cachorro from '../../../assets/images/sobre-cachorro.webp'
+import { CarrosselPolaroid } from './CarrosselPolaroid.jsx'
 import styles from './Sobre.module.css'
 
 const CARTOES = [
@@ -33,13 +33,7 @@ export function Sobre() {
             adoção.
           </p>
         </div>
-        <img
-          src={cachorro}
-          alt="Cachorro sorrindo enquanto recebe carinho na cabeça"
-          className={styles.foto}
-          width="462"
-          height="344"
-        />
+        <CarrosselPolaroid />
       </section>
 
       <section className={styles.cartoes} aria-label="O que fazemos">
