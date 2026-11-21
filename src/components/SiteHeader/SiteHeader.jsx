@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth.js'
 import { BackButton } from '../BackButton/BackButton.jsx'
 import { PillButton } from '../ui/PillButton.jsx'
-import { CloseIcon, HeartIcon, HouseIcon, LogoutIcon, MenuIcon, SearchIcon } from '../Icons/Icons.jsx'
+import { CloseIcon, HeartIcon, HouseIcon, InfoIcon, LogoutIcon, MenuIcon, SearchIcon } from '../Icons/Icons.jsx'
 import logo from '../../assets/images/logo-horizontal.webp'
 import styles from './SiteHeader.module.css'
 
@@ -148,6 +148,17 @@ export function SiteHeader({
                   <HeartIcon size={16} />
                   Vitrine de adoção
                 </Link>
+                <a
+                  href="/tutorial-pawtinhas.pdf"
+                  target="_blank"
+                  rel="noopener"
+                  role="menuitem"
+                  className={styles.menuItem}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <InfoIcon size={16} />
+                  Tutorial da plataforma
+                </a>
                 <button type="button" role="menuitem" className={styles.menuItem} onClick={handleLogout}>
                   <LogoutIcon size={16} />
                   Sair

@@ -172,7 +172,9 @@
   top: calc(100% + 12px);
   right: 0;
   z-index: 5;
-  min-width: 240px;
+  width: max-content;
+  min-width: 260px;
+  max-width: calc(100vw - 32px);
   padding: 8px;
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-md);
