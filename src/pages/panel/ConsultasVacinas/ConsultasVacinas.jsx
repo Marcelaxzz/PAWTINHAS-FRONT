@@ -9,6 +9,7 @@ import { Dialog } from '../../../components/ui/Dialog.jsx'
 import { RecordDialog } from '../../../components/ui/RecordDialog.jsx'
 import { EmptyState, ErrorState, LoadingState } from '../../../components/ui/States.jsx'
 import { PawOutline, ShieldCheckIcon, StethoscopeIcon } from '../../../components/Icons/Icons.jsx'
+import { useAuth } from '../../../hooks/useAuth.js'
 import { useClinic } from '../../../hooks/useClinic.js'
 import { useRecordActions } from '../../../hooks/useRecordActions.js'
 import { compareSchedule, formatDateBr, relativeDayLabel, todayIso } from '../../../utils/dates.js'
@@ -19,6 +20,7 @@ const STATUS_VACINA = ['Agendado', 'Pendente', 'Aplicada', 'Cancelado']
 
 export function ConsultasVacinas() {
   const { data, loading, error, reload, lookup, patchLocal } = useClinic(['consultas', 'vacinas'])
+  const { user } = useAuth()
   const consultaActions = useRecordActions('consultas', patchLocal)
   const vacinaActions = useRecordActions('vacinas', patchLocal)
   const [consultaId, setConsultaId] = useState(null)
@@ -216,7 +218,6 @@ export function ConsultasVacinas() {
               editTo={`/agenda/consultas/${consulta.id}/editar`}
               rows={[
                 { label: 'Data', value: `${formatDateBr(consulta.data)} às ${consulta.hora}` },
-                { label: 'Veterinário(a)', value: lookup.staff(consulta.veterinarioId)?.nome },
                 { label: 'Tutor(a)', value: lookup.tutor(consulta.tutorId)?.nome },
                 { label: 'Telefone do tutor', value: lookup.tutor(consulta.tutorId)?.telefone },
                 { label: 'Observações', value: consulta.observacoes || 'Sem observações.' },
@@ -242,7 +243,6 @@ export function ConsultasVacinas() {
               editTo={`/agenda/vacinas/${vacina.id}/editar`}
               rows={[
                 { label: 'Data', value: `${formatDateBr(vacina.data)} às ${vacina.hora}` },
-                { label: 'Profissional', value: lookup.staff(vacina.profissionalId)?.nome },
                 { label: 'Tutor(a)', value: lookup.tutor(vacina.tutorId)?.nome },
                 { label: 'Telefone do tutor', value: lookup.tutor(vacina.tutorId)?.telefone },
                 { label: 'Observações', value: vacina.observacoes || 'Sem observações.' },
@@ -292,7 +292,7 @@ export function ConsultasVacinas() {
                   </div>
                   <div>
                     <dt>Responsável</dt>
-                    <dd>{lookup.staff(comprovante.profissionalId)?.nome}</dd>
+                    <dd>{user?.name}</dd>
                   </div>
                   {comprovante.observacoes && (
                     <div>

@@ -3,7 +3,6 @@ import { ResourceForm } from '../../../components/ResourceForm/ResourceForm.jsx'
 import { NEW_PET } from '../../../components/ResourceForm/constants.js'
 import { formatDateBr, parseDateBr, todayIso } from '../../../utils/dates.js'
 
-const VETS = ['Veterinária', 'Veterinário']
 
 const PET = {
   name: 'petId',
@@ -65,15 +64,6 @@ export function NovaCirurgia() {
           required: true,
           maxLength: 120,
         },
-        {
-          name: 'cirurgiaoId',
-          label: 'Cirurgião',
-          type: 'staff',
-          roles: VETS,
-          placeholder: 'Selecione o cirurgião',
-          required: true,
-          requiredMessage: 'Selecione o cirurgião.',
-        },
         OBS('Ex.: jejum de 8 h, exames pedidos antes da cirurgia'),
         STATUS(['Agendado', 'Em andamento', 'Concluído', 'Cancelado']),
       ]}
@@ -98,15 +88,6 @@ export function NovaConsulta() {
         TUTOR,
         DATA('Ex.: 23/09/2026'),
         HORA('Ex.: 14:00'),
-        {
-          name: 'veterinarioId',
-          label: 'Veterinário',
-          type: 'staff',
-          roles: VETS,
-          placeholder: 'Selecione o profissional',
-          required: true,
-          requiredMessage: 'Selecione o profissional.',
-        },
         {
           name: 'motivo',
           label: 'Motivo da consulta',
@@ -154,15 +135,6 @@ export function NovaVacina() {
         },
         DATA('Ex.: 23/09/2026'),
         HORA('Ex.: 10:30'),
-        {
-          name: 'profissionalId',
-          label: 'Profissional',
-          type: 'staff',
-          roles: [...VETS, 'Técnico'],
-          placeholder: 'Selecione quem vai aplicar',
-          required: true,
-          requiredMessage: 'Selecione o profissional.',
-        },
         {
           name: 'status',
           label: 'Status',
@@ -213,15 +185,6 @@ export function NovoBanho() {
           required: true,
           requiredMessage: 'Selecione o serviço.',
         },
-        {
-          name: 'profissionalId',
-          label: 'Profissional',
-          type: 'staff',
-          roles: ['Groomer', ...VETS],
-          placeholder: 'Selecione o profissional',
-          required: true,
-          requiredMessage: 'Selecione o profissional.',
-        },
         OBS('Ex.: tem medo de secador, pele sensível'),
         STATUS(['Agendado', 'Em andamento', 'Concluído', 'Cancelado']),
       ]}
@@ -244,15 +207,6 @@ export function NovaVisita() {
       fields={[
         { ...PET, fillAddress: true },
         TUTOR,
-        {
-          name: 'cuidadorId',
-          label: 'Cuidador',
-          type: 'staff',
-          roles: ['Pet Sitter'],
-          placeholder: 'Selecione o cuidador',
-          required: true,
-          requiredMessage: 'Selecione o cuidador.',
-        },
         {
           name: 'periodo',
           label: 'Período',
@@ -344,7 +298,6 @@ export function NovaEmergencia() {
         prioridade: r.prioridade,
         entrada: `${formatDateBr(r.data)} - ${r.hora}`,
         motivo: r.motivo,
-        profissionalId: r.profissionalId ?? '',
         status: r.status,
         observacoes: r.observacoes ?? '',
       })}
@@ -385,15 +338,6 @@ export function NovaEmergencia() {
           maxLength: 200,
         },
         {
-          name: 'profissionalId',
-          label: 'Profissional responsável',
-          type: 'staff',
-          roles: VETS,
-          placeholder: 'Selecione o veterinário de plantão',
-          required: true,
-          requiredMessage: 'Selecione o profissional.',
-        },
-        {
           name: 'status',
           label: 'Status',
           type: 'select',
@@ -413,7 +357,6 @@ export function NovaEmergencia() {
           data: parseDateBr(data),
           hora,
           motivo: values.motivo,
-          profissionalId: values.profissionalId,
           status: values.status,
           observacoes: values.observacoes,
         }

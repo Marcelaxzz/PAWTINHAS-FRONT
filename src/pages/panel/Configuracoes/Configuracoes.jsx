@@ -5,9 +5,9 @@ import { SummaryBar } from '../../../components/ui/SummaryBar.jsx'
 import { Toggle } from '../../../components/ui/Toggle.jsx'
 import { Chip } from '../../../components/ui/Chip.jsx'
 import { Field, FieldGrid } from '../../../components/ui/Field.jsx'
-import { ConfirmDialog, Dialog } from '../../../components/ui/Dialog.jsx'
 import { DownloadIcon } from '../../../components/Icons/Icons.jsx'
 import { ErrorState, LoadingState } from '../../../components/ui/States.jsx'
+import { useAuth } from '../../../hooks/useAuth.js'
 import { useCollections } from '../../../hooks/useCollections.js'
 import { useToast } from '../../../hooks/useToast.js'
 import { clinicService } from '../../../services/clinicService.js'
@@ -15,7 +15,6 @@ import { dataService } from '../../../services/dataService.js'
 import { formatDateBr } from '../../../utils/dates.js'
 import { maskPhone } from '../../../utils/masks.js'
 import { initials } from '../../../utils/text.js'
-import { validateEmail, validateName } from '../../../utils/validators.js'
 import styles from './Configuracoes.module.css'
 
 // Minutos sem contato a partir dos quais o ESP32 é considerado desconectado.
@@ -49,10 +48,6 @@ function baixarArquivo(conteudo, nome) {
   URL.revokeObjectURL(url)
 }
 
-// A função define em quais agendamentos a pessoa aparece (cirurgião, groomer, pet sitter…).
-const FUNCOES = ['Veterinário', 'Técnico', 'Groomer', 'Pet Sitter', 'Recepcionista']
-const papelDa = (funcao) => (funcao === 'Veterinário' || funcao === 'Recepcionista' ? funcao : 'Equipe')
-
 function maskCnpj(value) {
   const d = value.replace(/\D/g, '').slice(0, 14)
   return d
@@ -63,33 +58,27 @@ function maskCnpj(value) {
 }
 
 export function Configuracoes() {
-  const { data, loading, error, reload, patchLocal } = useCollections(['configuracoes', 'profissionais'])
+  const { data, loading, error, reload, patchLocal } = useCollections(['configuracoes'])
 
   return (
-    <Page title="Configurações" subtitle="Dados da clínica, notificações, equipe e integrações.">
+    <Page title="Configurações" subtitle="Dados da clínica, notificações, acesso e integrações.">
       {loading && <LoadingState />}
       {error && <ErrorState message={error} onRetry={reload} />}
       {data?.configuracoes[0] && (
-        <ConfigContent settings={data.configuracoes[0]} usuarios={data.profissionais} patchLocal={patchLocal} />
+        <ConfigContent settings={data.configuracoes[0]} patchLocal={patchLocal} />
       )}
     </Page>
   )
 }
 
-function ConfigContent({ settings, usuarios, patchLocal }) {
+function ConfigContent({ settings, patchLocal }) {
   const toast = useToast()
+  const { user } = useAuth()
   const [form, setForm] = useState(() => structuredClone(settings))
   const [editing, setEditing] = useState(false)
   const [saving, setSaving] = useState(false)
-  const [usersOpen, setUsersOpen] = useState(false)
   const [status, setStatus] = useState(null)
   const [baixando, setBaixando] = useState(false)
-  const [invite, setInvite] = useState({ nome: '', email: '', funcao: 'Veterinário' })
-  const [inviteErrors, setInviteErrors] = useState({})
-  const [inviting, setInviting] = useState(false)
-  const [editingUser, setEditingUser] = useState(null)
-  const [removing, setRemoving] = useState(null)
-  const [removingBusy, setRemovingBusy] = useState(false)
 
   const carregarStatus = useCallback(() => {
     clinicService
@@ -138,67 +127,6 @@ function ConfigContent({ settings, usuarios, patchLocal }) {
       toast.error(err.message)
     } finally {
       setSaving(false)
-    }
-  }
-
-  const resetInvite = () => {
-    setEditingUser(null)
-    setInvite({ nome: '', email: '', funcao: 'Veterinário' })
-    setInviteErrors({})
-  }
-
-  const startEdit = (user) => {
-    setEditingUser(user)
-    setInvite({
-      nome: user.nome,
-      email: user.email ?? '',
-      funcao: FUNCOES.includes(user.funcao) ? user.funcao : 'Veterinário',
-    })
-    setInviteErrors({})
-  }
-
-  /** Adiciona uma pessoa à equipe ou salva a edição da pessoa selecionada. */
-  const sendInvite = async (event) => {
-    event.preventDefault()
-    const errors = { nome: validateName(invite.nome), email: validateEmail(invite.email) }
-    setInviteErrors(errors)
-    if (errors.nome || errors.email) return
-    setInviting(true)
-    try {
-      const payload = {
-        nome: invite.nome.trim(),
-        email: invite.email.trim().toLowerCase(),
-        funcao: invite.funcao,
-        // A conta Admin (veterinária responsável) mantém o papel ao trocar a função.
-        papel: editingUser?.papel === 'Admin' ? 'Admin' : papelDa(invite.funcao),
-        iniciais: initials(invite.nome),
-      }
-      const saved = editingUser
-        ? await dataService.update('profissionais', editingUser.id, payload)
-        : await dataService.create('profissionais', payload)
-      patchLocal('profissionais', saved)
-      toast.success(editingUser ? `${saved.nome} foi atualizado(a).` : `${saved.nome} foi adicionado(a) à equipe.`)
-      resetInvite()
-    } catch (err) {
-      if (err.fields) setInviteErrors(err.fields)
-      toast.error(err.message)
-    } finally {
-      setInviting(false)
-    }
-  }
-
-  const removeUser = async () => {
-    setRemovingBusy(true)
-    try {
-      await dataService.remove('profissionais', removing.id)
-      patchLocal('profissionais', removing, 'remove')
-      toast.success(`${removing.nome} foi removido(a) da equipe.`)
-      if (editingUser?.id === removing.id) resetInvite()
-      setRemoving(null)
-    } catch (err) {
-      toast.error(err.message)
-    } finally {
-      setRemovingBusy(false)
     }
   }
 
@@ -255,26 +183,21 @@ function ConfigContent({ settings, usuarios, patchLocal }) {
             </FieldGrid>
           </section>
 
-          <section className={styles.cartao} aria-labelledby="usuarios">
-            <header className={styles.cartaoTopo}>
-              <h2 id="usuarios">Equipe</h2>
-              <PillButton variant="contorno" onClick={() => setUsersOpen(true)}>
-                Gerenciar equipe
-              </PillButton>
-            </header>
+          <section className={styles.cartao} aria-labelledby="acesso">
+            <h2 id="acesso" className={styles.tituloSolto}>
+              Acesso ao painel
+            </h2>
             <ul className={styles.usuarios}>
-              {usuarios.slice(0, 4).map((u) => (
-                <li key={u.id}>
-                  <span className={styles.avatar} aria-hidden="true">
-                    {u.iniciais || initials(u.nome)}
-                  </span>
-                  <span className={styles.usuarioTexto}>
-                    <strong>{u.nome}</strong>
-                    <span>{u.papel === 'Admin' ? `${u.funcao} - Admin` : u.funcao}</span>
-                  </span>
-                  {u.papel === 'Admin' && <Chip size="xs">Admin</Chip>}
-                </li>
-              ))}
+              <li>
+                <span className={styles.avatar} aria-hidden="true">
+                  {initials(user?.name ?? '')}
+                </span>
+                <span className={styles.usuarioTexto}>
+                  <strong>{user?.name}</strong>
+                  <span>{user?.email}</span>
+                </span>
+                <Chip size="xs">Veterinária responsável</Chip>
+              </li>
             </ul>
           </section>
         </div>
@@ -359,97 +282,6 @@ function ConfigContent({ settings, usuarios, patchLocal }) {
         {settings.atualizadoEm.slice(11, 16)}
         {dirty && <span className={styles.pendente}> · Você tem alterações não salvas.</span>}
       </SummaryBar>
-
-      <Dialog
-        open={usersOpen && !removing}
-        onClose={() => {
-          setUsersOpen(false)
-          resetInvite()
-        }}
-        title="Gerenciar equipe"
-        description="Cadastre as pessoas da equipe e o papel de cada uma. Elas aparecem nos agendamentos; o acesso ao painel continua exclusivo da veterinária responsável."
-        size="lg"
-      >
-        <ul className={`${styles.usuarios} ${styles.usuariosDialogo}`}>
-          {usuarios.map((u) => (
-            <li key={u.id}>
-              <span className={styles.avatar} aria-hidden="true">
-                {u.iniciais || initials(u.nome)}
-              </span>
-              <span className={styles.usuarioTexto}>
-                <strong>{u.nome}</strong>
-                <span>{u.email || 'Sem e-mail cadastrado'}</span>
-              </span>
-              <Chip size="xs">{u.funcao}</Chip>
-              <span className={styles.usuarioAcoes}>
-                <button
-                  type="button"
-                  className={styles.editar}
-                  onClick={() => startEdit(u)}
-                  aria-pressed={editingUser?.id === u.id}
-                >
-                  Editar
-                </button>
-                {u.papel !== 'Admin' && (
-                  <button type="button" className={styles.remover} onClick={() => setRemoving(u)}>
-                    Remover
-                  </button>
-                )}
-              </span>
-            </li>
-          ))}
-        </ul>
-        <form className={styles.convite} onSubmit={sendInvite} noValidate>
-          <h3>{editingUser ? `Editar ${editingUser.nome}` : 'Adicionar à equipe'}</h3>
-          <FieldGrid>
-            <Field
-              label="Nome completo"
-              required
-              value={invite.nome}
-              maxLength={100}
-              error={inviteErrors.nome}
-              onChange={(e) => setInvite((p) => ({ ...p, nome: e.target.value }))}
-            />
-            <Field
-              label="E-mail"
-              required
-              type="email"
-              autoComplete="off"
-              value={invite.email}
-              maxLength={254}
-              error={inviteErrors.email}
-              onChange={(e) => setInvite((p) => ({ ...p, email: e.target.value }))}
-            />
-            <Field
-              label="Função"
-              as="select"
-              value={invite.funcao}
-              options={FUNCOES.map((f) => ({ value: f, label: f }))}
-              onChange={(e) => setInvite((p) => ({ ...p, funcao: e.target.value }))}
-            />
-          </FieldGrid>
-          <div className={styles.conviteAcoes}>
-            {editingUser && (
-              <PillButton variant="contorno" onClick={resetInvite} disabled={inviting}>
-                Cancelar edição
-              </PillButton>
-            )}
-            <PillButton type="submit" loading={inviting}>
-              {editingUser ? 'Salvar' : 'Adicionar'}
-            </PillButton>
-          </div>
-        </form>
-      </Dialog>
-
-      <ConfirmDialog
-        open={Boolean(removing)}
-        onClose={() => setRemoving(null)}
-        onConfirm={removeUser}
-        loading={removingBusy}
-        title={`Remover ${removing?.nome ?? ''}?`}
-        message="A pessoa sai da equipe e deixa de aparecer como responsável nos agendamentos. Os registros antigos continuam salvos."
-        confirmLabel="Remover"
-      />
     </>
   )
 }
