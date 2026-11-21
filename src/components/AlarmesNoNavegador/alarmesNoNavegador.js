@@ -69,13 +69,59 @@ export async function pedirPermissaoNotificacao() {
   }
 }
 
-export function notificar(titulo, texto) {
-  if (permissaoNotificacao() !== 'granted') return null
+const TAG_ALARME = 'pawtinhas-alarme'
+const MENSAGEM_PARAR = 'pawtinhas-parar-alarme'
+let registro = null
+
+/** Registra o service worker dos alarmes (é ele que põe o botão "Desligar alarme" na notificação do sistema). */
+export function prepararNotificacoes() {
+  if (registro || typeof navigator === 'undefined' || !('serviceWorker' in navigator)) return registro
+  registro = navigator.serviceWorker.register('/sw-alarmes.js', { scope: '/' }).catch(() => null)
+  return registro
+}
+
+/**
+ * Notificação do sistema (canto da tela, mesmo com o navegador em outra aba ou minimizado) com o botão
+ * "Desligar alarme". Devolve uma função que fecha a notificação.
+ */
+export async function notificar(titulo, texto, minuto) {
+  if (permissaoNotificacao() !== 'granted') return () => {}
+  const opcoes = { body: texto, tag: TAG_ALARME, requireInteraction: true, renotify: true, icon: '/favicon.png' }
   try {
-    return new Notification(titulo, { body: texto, tag: 'pawtinhas-alarme', requireInteraction: true })
+    const sw = await prepararNotificacoes()
+    if (sw?.showNotification) {
+      await sw.showNotification(titulo, {
+        ...opcoes,
+        data: { minuto },
+        actions: [{ action: 'parar', title: 'Desligar alarme' }],
+      })
+      return () =>
+        sw
+          .getNotifications({ tag: TAG_ALARME })
+          .then((lista) => lista.forEach((n) => n.close()))
+          .catch(() => {})
+    }
   } catch {
-    return null
+    // Sem service worker: cai na notificação simples (sem botão; o clique traz o painel para a frente).
   }
+  try {
+    const simples = new Notification(titulo, opcoes)
+    simples.onclick = () => window.focus()
+    return () => simples.close()
+  } catch {
+    return () => {}
+  }
+}
+
+/** "Desligar alarme" apertado na notificação do sistema. */
+export function aoPedirParadaPelaNotificacao(ouvinte) {
+  if (typeof navigator === 'undefined' || !('serviceWorker' in navigator)) return () => {}
+  const receber = (evento) => {
+    if (evento.data?.tipo === MENSAGEM_PARAR) ouvinte(evento.data.minuto)
+  }
+  navigator.serviceWorker.addEventListener('message', receber)
+  navigator.serviceWorker.startMessages?.()
+  return () => navigator.serviceWorker.removeEventListener('message', receber)
 }
 
 // ---------- Som ----------

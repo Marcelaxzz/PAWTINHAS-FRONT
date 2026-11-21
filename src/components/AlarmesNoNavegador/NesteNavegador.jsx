@@ -25,7 +25,7 @@ export function NesteNavegador() {
     if (valor && notificacaoSuportada()) setPermissao(await pedirPermissaoNotificacao())
     definirTocarNoNavegador(valor)
     setLigado(valor)
-    toast.success(valor ? 'Os alarmes vão tocar neste navegador.' : 'Os alarmes não vão mais tocar neste navegador.')
+    toast.success(valor ? 'O som dos alarmes vai tocar neste navegador.' : 'Os alarmes vão aparecer aqui sem som.')
   }
 
   const pedirNotificacao = async () => setPermissao(await pedirPermissaoNotificacao())
@@ -37,13 +37,16 @@ export function NesteNavegador() {
       </span>
       <div className={styles.iotTexto}>
         <Toggle
-          label="Tocar os alarmes neste navegador"
-          description="Com o painel aberto, mesmo em outra aba, os alarmes ativos tocam aqui também."
+          label="Tocar o som dos alarmes neste navegador"
+          description="Com o site aberto, mesmo em outra aba, o alarme apita aqui. O aviso no canto da tela, com o botão de desligar, aparece sempre."
           checked={ligado}
           onChange={alternar}
         />
         {ligado && permissao === 'denied' && (
-          <p>As notificações estão bloqueadas neste navegador. O som e o aviso na tela continuam funcionando.</p>
+          <p>
+            As notificações estão bloqueadas neste navegador. Com o site em outra aba, o aviso do Windows não aparece;
+            libere em Configurações do site, no cadeado da barra de endereço.
+          </p>
         )}
       </div>
       <div className={styles.iotAcoes}>

@@ -5,6 +5,7 @@ import { ToastProvider } from './context/ToastContext.jsx'
 import { GuestRoute, PrivateRoute } from './routes/RouteGuards.jsx'
 import { LoadingScreen } from './components/LoadingScreen/LoadingScreen.jsx'
 import { ScrollToTop } from './components/ScrollToTop/ScrollToTop.jsx'
+import { AlarmesDaConta } from './components/AlarmesNoNavegador/AlarmesDaConta.jsx'
 
 const page = (loader, name) => lazy(() => loader().then((module) => ({ default: module[name] })))
 
@@ -71,6 +72,7 @@ export function App() {
       <ScrollToTop />
       <AuthProvider>
         <ToastProvider>
+          <AlarmesDaConta />
           <Suspense fallback={<LoadingScreen />}>
             <Routes>
               <Route path="/" element={<Welcome />} />

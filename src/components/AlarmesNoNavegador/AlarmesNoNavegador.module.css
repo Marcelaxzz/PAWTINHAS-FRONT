@@ -1,6 +1,63 @@
-.lista {
+/* Aviso do alarme tocando: fica no canto de baixo, por cima de tudo, em qualquer página. */
+.aviso {
+  position: fixed;
+  z-index: 120;
+  right: max(24px, env(safe-area-inset-right, 0px));
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   display: grid;
   gap: 14px;
+  width: min(360px, calc(100vw - 32px));
+  overflow: hidden;
+  padding: 18px 18px 20px;
+  border-radius: 22px;
+  background: var(--cor-cafe-escuro);
+  color: var(--cor-creme);
+  box-shadow: 0 24px 48px -18px rgba(54, 36, 26, 0.65);
+  animation: entrar 0.35s ease-out both;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icone {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--cor-caramelo);
+  color: var(--cor-cafe-escuro);
+  animation: balancar 1s ease-in-out infinite;
+}
+
+.cabecalho {
+  min-width: 0;
+}
+
+.situacao {
+  margin: 0;
+  font-size: var(--texto-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cor-caramelo);
+}
+
+.titulo {
+  margin: 2px 0 0;
+  font-family: var(--fonte-titulo);
+  font-size: 1.375rem;
+  line-height: 1.2;
+  color: var(--cor-creme);
+}
+
+.lista {
+  display: grid;
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -8,21 +65,115 @@
 
 .lista li {
   display: grid;
-  gap: 2px;
+  gap: 1px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(251, 246, 235, 0.08);
 }
 
 .lista strong {
-  font-family: var(--fonte-titulo, inherit);
-  font-size: 1.375rem;
-  color: var(--cor-cafe-escuro);
+  font-weight: 600;
+  color: var(--cor-creme);
 }
 
 .lista span {
-  font-weight: 600;
-  color: var(--cor-cafe);
+  font-size: var(--texto-sm);
+  color: var(--cor-areia);
 }
 
-.lista p {
-  font-size: var(--texto-sm);
-  color: var(--cor-taupe);
+.parar {
+  min-height: 50px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--cor-creme);
+  color: var(--cor-cafe-escuro);
+  font: inherit;
+  font-size: var(--texto-md);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.parar:hover {
+  background: var(--cor-branco);
+}
+
+.parar:active {
+  transform: scale(0.98);
+}
+
+.parar:focus-visible {
+  outline: 3px solid var(--cor-caramelo);
+  outline-offset: 3px;
+}
+
+.nota {
+  margin: -6px 0 0;
+  font-size: var(--texto-xs);
+  text-align: center;
+  color: var(--cor-areia);
+  opacity: 0.85;
+}
+
+/* Barra fina no pé do aviso: o tempo que falta para o alarme parar sozinho. */
+.tempo {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 100%;
+  background: var(--cor-caramelo);
+  transform-origin: left;
+  animation: tempo linear forwards;
+}
+
+.parado .icone {
+  animation: none;
+  background: var(--cor-areia);
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes balancar {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-12deg);
+  }
+  75% {
+    transform: rotate(12deg);
+  }
+}
+
+@keyframes tempo {
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .aviso {
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    width: calc(100vw - 32px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aviso,
+  .icone {
+    animation: none;
+  }
+  .tempo {
+    display: none;
+  }
 }

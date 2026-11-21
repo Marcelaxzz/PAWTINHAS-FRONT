@@ -1,6 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { SiteHeader } from '../../components/SiteHeader/SiteHeader.jsx'
-import { AlarmesNoNavegador } from '../../components/AlarmesNoNavegador/AlarmesNoNavegador.jsx'
 import styles from './PanelLayout.module.css'
 
 const LINKS = [
@@ -22,7 +21,6 @@ export function PanelLayout() {
     <div className={styles.app}>
       <SiteHeader links={LINKS} homePath="/inicio" showBack={pathname !== '/inicio'} backFallback="/inicio" search />
       <Outlet />
-      <AlarmesNoNavegador />
     </div>
   )
 }
