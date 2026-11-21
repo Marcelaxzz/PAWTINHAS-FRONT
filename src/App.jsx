@@ -6,6 +6,7 @@ import { GuestRoute, PrivateRoute } from './routes/RouteGuards.jsx'
 import { LoadingScreen } from './components/LoadingScreen/LoadingScreen.jsx'
 import { ScrollToTop } from './components/ScrollToTop/ScrollToTop.jsx'
 import { AlarmesDaConta } from './components/AlarmesNoNavegador/AlarmesDaConta.jsx'
+import { AtualizacaoAutomatica } from './components/AtualizacaoAutomatica/AtualizacaoAutomatica.jsx'
 
 const page = (loader, name) => lazy(() => loader().then((module) => ({ default: module[name] })))
 
@@ -73,6 +74,7 @@ export function App() {
       <AuthProvider>
         <ToastProvider>
           <AlarmesDaConta />
+          <AtualizacaoAutomatica />
           <Suspense fallback={<LoadingScreen />}>
             <Routes>
               <Route path="/" element={<Welcome />} />
