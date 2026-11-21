@@ -10,7 +10,8 @@ const LINKS = [
   { to: '/alarmes', label: 'Alarmes' },
   { to: '/calculadoras', label: 'Calculadoras' },
   { to: '/admin/adocoes', label: 'Adoção' },
-  { to: '/configuracoes', label: 'Configurações' },
+  // Abre o guia em PDF numa aba nova; as configurações ficam no menu da conta (a letra no canto).
+  { href: '/tutorial-pawtinhas.pdf', label: 'Tutorial' },
 ]
 
 /** Layout do painel da veterinária (todas as telas internas). */

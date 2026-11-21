@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth.js'
 import { BackButton } from '../BackButton/BackButton.jsx'
 import { PillButton } from '../ui/PillButton.jsx'
-import { CloseIcon, HeartIcon, HouseIcon, InfoIcon, LogoutIcon, MenuIcon, SearchIcon } from '../Icons/Icons.jsx'
+import { CloseIcon, HeartIcon, HouseIcon, LogoutIcon, MenuIcon, SearchIcon, SlidersIcon } from '../Icons/Icons.jsx'
 import logo from '../../assets/images/logo-horizontal.webp'
 import styles from './SiteHeader.module.css'
 
@@ -27,7 +27,7 @@ function useDismiss(open, close, ref) {
 
 /**
  * Cabeçalho único do site. Cada área (painel, adoção) só muda os links.
- * links: [{ to, label, end?, match?(pathname) }]
+ * links: [{ to, label, end?, match?(pathname) }] ou { href, label } para abrir um arquivo numa aba nova
  */
 export function SiteHeader({
   links,
@@ -100,19 +100,27 @@ export function SiteHeader({
 
       <nav id={navId} className={`${styles.nav} ${navOpen ? styles.navAberta : ''}`} aria-label={navLabel}>
         <ul>
-          {links.map((link) => (
-            <li key={link.to}>
-              <NavLink
-                to={link.to}
-                end={link.end}
-                className={({ isActive }) =>
-                  `${styles.link} ${(link.match ? link.match(pathname) : isActive) ? styles.ativo : ''}`
-                }
-              >
-                {link.label}
-              </NavLink>
-            </li>
-          ))}
+          {links.map((link) =>
+            link.href ? (
+              <li key={link.href}>
+                <a href={link.href} target="_blank" rel="noopener" className={styles.link}>
+                  {link.label}
+                </a>
+              </li>
+            ) : (
+              <li key={link.to}>
+                <NavLink
+                  to={link.to}
+                  end={link.end}
+                  className={({ isActive }) =>
+                    `${styles.link} ${(link.match ? link.match(pathname) : isActive) ? styles.ativo : ''}`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            ),
+          )}
         </ul>
         {search && searchForm('movel', styles.buscaMovel)}
       </nav>
@@ -148,17 +156,10 @@ export function SiteHeader({
                   <HeartIcon size={16} />
                   Vitrine de adoção
                 </Link>
-                <a
-                  href="/tutorial-pawtinhas.pdf"
-                  target="_blank"
-                  rel="noopener"
-                  role="menuitem"
-                  className={styles.menuItem}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <InfoIcon size={16} />
-                  Tutorial da plataforma
-                </a>
+                <Link to="/configuracoes" role="menuitem" className={styles.menuItem}>
+                  <SlidersIcon size={16} />
+                  Configurações
+                </Link>
                 <button type="button" role="menuitem" className={styles.menuItem} onClick={handleLogout}>
                   <LogoutIcon size={16} />
                   Sair
