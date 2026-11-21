@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
-import { PawFilled } from '../../../components/Icons/Icons.jsx'
+import pata1 from '../../../assets/images/pata-1.png'
+import pata2 from '../../../assets/images/pata-2.png'
+import pata3 from '../../../assets/images/pata-3.png'
 import { FOTOS_CAROL } from './fotosCarol.js'
 import styles from './CarrosselPolaroid.module.css'
 
@@ -27,9 +29,9 @@ export function CarrosselPolaroid() {
       onFocus={() => setPausado(true)}
       onBlur={() => setPausado(false)}
     >
-      <PawFilled className={`${styles.pata} ${styles.pataTopo}`} />
-      <PawFilled className={`${styles.pata} ${styles.pataLado}`} />
-      <PawFilled className={`${styles.pata} ${styles.pataBaixo}`} />
+      <img src={pata1} alt="" aria-hidden="true" className={`${styles.pata} ${styles.pataTopo}`} />
+      <img src={pata2} alt="" aria-hidden="true" className={`${styles.pata} ${styles.pataLado}`} />
+      <img src={pata3} alt="" aria-hidden="true" className={`${styles.pata} ${styles.pataBaixo}`} />
 
       <div className={styles.fotos}>
         {FOTOS_CAROL.map((foto, i) => (
@@ -49,9 +51,9 @@ export function CarrosselPolaroid() {
 
       <figcaption className={styles.rodape}>
         <span className={styles.legenda}>
-          <PawFilled className={styles.pataMini} />
+          <img src={pata2} alt="" aria-hidden="true" className={styles.pataMini} />
           Carol e seus pacientes
-          <PawFilled className={styles.pataMini} />
+          <img src={pata2} alt="" aria-hidden="true" className={styles.pataMini} />
         </span>
         <span className={styles.pontos}>
           {FOTOS_CAROL.map((foto, i) => (

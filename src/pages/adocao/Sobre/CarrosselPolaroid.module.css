@@ -88,34 +88,35 @@
 .pata {
   position: absolute;
   z-index: 1;
-  fill: var(--cor-caramelo);
-  filter: drop-shadow(0 3px 4px rgba(54, 36, 26, 0.35));
+  height: auto;
+  filter: drop-shadow(0 2px 3px rgba(54, 36, 26, 0.3));
+  pointer-events: none;
 }
 
 .pataTopo {
   top: -18px;
   left: -16px;
-  width: 46px;
+  width: 50px;
   transform: rotate(-24deg);
 }
 
 .pataLado {
   top: 42%;
   right: -20px;
-  width: 36px;
+  width: 40px;
   transform: rotate(18deg);
 }
 
 .pataBaixo {
   bottom: 54px;
   left: -14px;
-  width: 30px;
+  width: 34px;
   transform: rotate(-8deg);
 }
 
 .pataMini {
-  width: 14px;
-  fill: var(--cor-caramelo);
+  width: 16px;
+  height: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
