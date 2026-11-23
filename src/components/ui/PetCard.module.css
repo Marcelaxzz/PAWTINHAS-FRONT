@@ -150,6 +150,19 @@
   gap: 12px;
 }
 
+/* Tablet: os botões descem para baixo do texto, que ganha a largura toda do cartão. */
+@media (max-width: 960px) {
+  .card {
+    flex-wrap: wrap;
+  }
+
+  .acoes {
+    width: 100%;
+    padding-top: 14px;
+    border-top: 1px solid var(--cor-borda);
+  }
+}
+
 @media (max-width: 720px) {
   /* No celular o texto inteiro importa mais que a linha única (ex.: endereço da visita). */
   .truncar {

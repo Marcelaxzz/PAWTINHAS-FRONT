@@ -59,15 +59,15 @@
   --fonte-texto: 'Lexend Variable', 'Lexend', system-ui, sans-serif;
   --fonte-serifa: 'Fraunces Variable', 'Fraunces', Georgia, serif;
 
-  /* Escala de tamanhos (1rem = 19px). O menor texto do site tem ~18px. */
-  --texto-xs: 0.9375rem; /* ~17px: etiquetas */
-  --texto-sm: 1rem; /* 18px: apoio, rótulos */
-  --texto-base: 1.0625rem; /* ~19px: corpo e botões */
-  --texto-md: 1.125rem; /* ~20px: parágrafos de destaque */
-  --texto-lg: 1.1875rem; /* ~21px: subtítulos */
-  --titulo-sm: 1.25rem; /* ~22px: títulos de cartão */
-  --titulo-md: 1.5rem; /* 27px: títulos de seção */
-  --titulo-lg: clamp(1.875rem, 4vw, 2.5rem); /* 30 a 40px: título da página */
+  /* Escala de tamanhos (1rem = 15,5px no celular a 17px no computador). */
+  --texto-xs: 0.9375rem; /* 14,5 a 16px: etiquetas */
+  --texto-sm: 1rem; /* 15,5 a 17px: apoio, rótulos */
+  --texto-base: 1.0625rem; /* 16,5 a 18px: corpo e botões */
+  --texto-md: 1.125rem; /* 17,5 a 19px: parágrafos de destaque */
+  --texto-lg: 1.1875rem; /* 18,5 a 20px: subtítulos */
+  --titulo-sm: 1.25rem; /* 19,5 a 21px: títulos de cartão */
+  --titulo-md: 1.5rem; /* 23 a 25,5px: títulos de seção */
+  --titulo-lg: clamp(1.875rem, 4vw, 2.5rem); /* 29 a 42px: título da página */
   --titulo-xl: clamp(2.25rem, 6vw, 3.5rem); /* destaque */
 
   /* Layout */
@@ -102,10 +102,11 @@
   box-sizing: border-box;
 }
 
-/* Todas as fontes do site usam rem: aumentar aqui aumenta tudo (19px de base em vez de 16px).
+/* Todas as fontes do site usam rem: este valor muda tudo de uma vez.
+   Acompanha a largura da tela: ~15,5px no celular, ~16,5px no tablet e 17px no computador.
    Os espaçamentos ficam em px, então o layout não muda. */
 html {
-  font-size: 118.75%;
+  font-size: clamp(15.5px, 14.8px + 0.16vw, 17px);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }

@@ -187,4 +187,19 @@
   .corpo {
     padding: 18px 16px 16px 12px;
   }
+
+  /* Tela estreita: o número e o estoque ficam um embaixo do outro, sem cortar. */
+  .numeros {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px 12px;
+  }
+
+  .destaque strong {
+    font-size: 1.875rem;
+  }
+
+  .estoque {
+    align-items: flex-start;
+  }
 }

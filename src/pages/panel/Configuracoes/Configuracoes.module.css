@@ -74,8 +74,9 @@
 
 .usuarios li {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 8px 12px;
   padding: 12px 0;
   border-bottom: 1px solid var(--cor-borda);
 }
@@ -109,8 +110,9 @@
 .usuarioTexto {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 1 1 200px;
   min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .usuarioTexto strong {
