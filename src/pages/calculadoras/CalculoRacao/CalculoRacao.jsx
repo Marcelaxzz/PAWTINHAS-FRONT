@@ -211,7 +211,7 @@ function RacaoForm({ pets, racoes, fatores }) {
                 hint={
                   personalizado
                     ? 'Opcional. Em branco, usa o peso atual.'
-                    : 'A AAHA calcula a perda de peso no peso ideal.'
+                    : 'Para perder peso, a conta usa o peso ideal.'
                 }
                 value={values.pesoMetaKg}
                 onChange={(e) => set('pesoMetaKg', maskDecimal(e.target.value, 6))}
@@ -248,7 +248,7 @@ function RacaoForm({ pets, racoes, fatores }) {
                   name="condicao"
                   label="Fase e condição corporal"
                   as="select"
-                  span={personalizado || ajustavel ? 1 : 2}
+                  span={2}
                   required
                   placeholder="Selecione…"
                   options={[
@@ -258,7 +258,6 @@ function RacaoForm({ pets, racoes, fatores }) {
                   value={values.condicao}
                   onChange={(e) => setValues((prev) => ({ ...prev, condicao: e.target.value, fatorPersonalizado: '' }))}
                   error={errosCampo.condicao}
-                  hint={condicao ? `Fonte: ${condicao.fonte}` : undefined}
                 />
                 {ajustavel && (
                   <Field
@@ -289,12 +288,13 @@ function RacaoForm({ pets, racoes, fatores }) {
 
             <div className={styles.secao}>
               <h2 className={styles.secaoTitulo}>Ração</h2>
-              <FieldGrid>
+              <FieldGrid className={styles.gradeLarga}>
                 <Field
                   name="racaoId"
                   label="Ração"
                   as="select"
                   span={2}
+                  className={styles.campoTriplo}
                   required
                   placeholder="Selecione do catálogo…"
                   options={[
@@ -441,13 +441,8 @@ function RacaoForm({ pets, racoes, fatores }) {
               <summary>Como foi calculado</summary>
               <p className={styles.formula}>
                 Gramas por dia = MER ÷ energia da ração (kcal/kg) × 1.000. O resultado é um ponto de partida: ajuste a
-                quantidade acompanhando o peso e o escore corporal, como recomendam as fontes abaixo.
+                quantidade acompanhando o peso e o escore corporal.
               </p>
-              <ul className={styles.fontes}>
-                {result.fontes.map((fonte) => (
-                  <li key={fonte}>{fonte}</li>
-                ))}
-              </ul>
             </details>
           </div>
         )}

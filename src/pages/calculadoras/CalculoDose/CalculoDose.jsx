@@ -335,10 +335,9 @@ function DoseForm({ pets, medicamentos }) {
               </span>
             </p>
           )}
-          {med && (med.observacoes || med.fonte) && (
+          {med?.observacoes && (
             <div className={styles.referencia}>
-              {med.observacoes && <p>{med.observacoes}</p>}
-              {med.fonte && <p className={styles.fonteMed}>Fonte: {med.fonte}</p>}
+              <p>{med.observacoes}</p>
             </div>
           )}
           {medicamentos.length === 0 && (
@@ -351,7 +350,7 @@ function DoseForm({ pets, medicamentos }) {
 
         <div className={styles.secao}>
           <h2 className={styles.secaoTitulo}>Posologia</h2>
-          <FieldGrid>
+          <FieldGrid className={styles.gradeLarga}>
             <Field
               name="doseMgKg"
               label="Dose (mg/kg)"
@@ -377,6 +376,7 @@ function DoseForm({ pets, medicamentos }) {
               as="select"
               required
               span={2}
+              className={styles.campoDuplo}
               placeholder="Selecione…"
               options={INTERVALOS.map((h) => ({ value: String(h), label: intervaloLabel(h) }))}
               value={values.intervaloHoras}

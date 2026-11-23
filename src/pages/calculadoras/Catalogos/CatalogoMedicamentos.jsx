@@ -168,7 +168,6 @@ export function CatalogoMedicamentos() {
             )}
             {aberto.principioAtivo && <p className={styles.notas}>Princípio ativo: {aberto.principioAtivo}</p>}
             {aberto.observacoes && <p className={styles.notas}>{aberto.observacoes}</p>}
-            {aberto.fonte && <p className={styles.itemFonte}>Fonte: {aberto.fonte}</p>}
             <PainelEstoque
               item={estoque.itens?.[aberto.id]}
               onAcao={(acao, item) => setMovimento({ acao, itemId: item.itemId, nome: aberto.nome })}
@@ -402,15 +401,6 @@ function MedicamentoDialog({ medicamento, onClose, onSaved }) {
             maxLength={500}
             value={values.observacoes}
             onChange={set('observacoes')}
-          />
-          <Field
-            label="Fonte das doses"
-            span={2}
-            maxLength={300}
-            placeholder="Ex.: bula do produto, consenso ou manual veterinário"
-            hint="Quem prescrever vê de onde vieram as faixas."
-            value={values.fonte}
-            onChange={set('fonte')}
           />
         </FieldGrid>
         {values.forma === 'Comprimido' && (

@@ -1,39 +1,51 @@
 /* Estilos compartilhados pelas calculadoras (dose e ração) e pelos catálogos. */
 
-/* Tudo na tela sem rolar: o formulário em duas colunas e o resultado ao lado, da mesma altura. */
+/* O formulário à esquerda e o resultado ao lado; cada cartão com a altura do próprio conteúdo. */
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
-  align-items: stretch;
+  align-items: start;
   gap: 24px;
   counter-reset: secao;
 }
 
+/* Seções 1 e 2 lado a lado; a 3ª embaixo, na largura toda (não sobra coluna vazia). */
 .formulario {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  /* A 2ª linha é flexível: a seção da direita (que ocupa as duas) não empurra a 2ª seção para baixo. */
-  grid-template-rows: auto 1fr;
   align-content: start;
 }
 
-.formulario > .secao:nth-child(2) {
-  align-self: start;
+.formulario > .secao:nth-child(1) {
+  grid-column: 1;
+  padding-right: 32px;
 }
 
-.formulario > .secao:nth-child(-n + 2) {
-  grid-column: 1;
-  padding-right: 40px;
+.formulario > .secao:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1;
+  margin-top: 0;
+  padding-top: 0;
+  padding-left: 32px;
+  border-top: 0;
+  border-left: 1px solid var(--cor-borda);
 }
 
 .formulario > .secao:nth-child(3) {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  margin-top: 0;
-  padding-top: 0;
-  padding-left: 40px;
-  border-top: 0;
-  border-left: 1px solid var(--cor-borda);
+  grid-column: 1 / -1;
+}
+
+/* Campos da 3ª seção em 4 colunas; o campo marcado como duplo ocupa duas. */
+.gradeLarga {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.gradeLarga > .campoDuplo {
+  grid-column: span 2;
+}
+
+.gradeLarga > .campoTriplo {
+  grid-column: span 3;
 }
 
 .cartao {
@@ -341,15 +353,6 @@
   color: var(--cor-taupe);
 }
 
-.fontes {
-  display: grid;
-  gap: 4px;
-  margin: 10px 0 0;
-  padding-left: 16px;
-  font-size: var(--texto-xs);
-  line-height: 1.45;
-  color: var(--cor-taupe);
-}
 
 .salvarExtras {
   display: flex;
@@ -491,11 +494,6 @@
   color: var(--cor-taupe);
 }
 
-.itemFonte {
-  font-size: var(--texto-xs);
-  font-style: italic;
-  color: var(--cor-taupe);
-}
 
 .itemDados {
   display: grid;
@@ -675,11 +673,11 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .formulario > .secao:nth-child(-n + 2) {
+  .formulario > .secao:nth-child(1) {
     padding-right: 0;
   }
 
-  .formulario > .secao:nth-child(3) {
+  .formulario > .secao:nth-child(2) {
     grid-column: 1;
     grid-row: auto;
     margin-top: 22px;
@@ -687,6 +685,29 @@
     padding-left: 0;
     border-top: 1px solid var(--cor-borda);
     border-left: 0;
+  }
+
+  .formulario > .secao:nth-child(3) {
+    grid-column: 1;
+  }
+
+  .gradeLarga {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gradeLarga > .campoTriplo {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .gradeLarga {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gradeLarga > .campoDuplo,
+  .gradeLarga > .campoTriplo {
+    grid-column: auto;
   }
 }
 
@@ -719,7 +740,3 @@
   color: var(--cor-cafe-medio);
 }
 
-.fonteMed {
-  font-size: var(--texto-xs);
-  color: var(--cor-taupe);
-}
