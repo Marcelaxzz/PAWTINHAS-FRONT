@@ -93,7 +93,74 @@
   --raio-lg: 24px;
   --raio-card: 32px;
 
+  /*
+   * Cores com papel fixo: não mudam no modo escuro.
+   * papel = fundo dos cartões brancos; *-fundo = fundo de botões e etiquetas escuras;
+   * *-fixa = texto claro sobre fundos escuros (aviso do alarme, botão voltar).
+   */
+  --cor-papel: #ffffff;
+  --cor-cafe-fundo: #6e4d36;
+  --cor-cafe-escuro-fundo: #36241a;
+  --cor-areia-fixa: #f4e6d3;
+  --cor-creme-fixo: #fbf6eb;
+
   color-scheme: light;
+}
+
+/*
+ * Modo escuro: só troca os valores das cores. Fundos ficam em tons de café bem escuro,
+ * textos em creme, e cada par "texto + fundo" mantém o contraste do modo claro.
+ */
+:root[data-tema='escuro'] {
+  --cor-areia: #1b1410;
+  --cor-creme: #211913;
+  --cor-creme-claro: #261d17;
+  --cor-superficie: #2a2019;
+  --cor-papel: #2e231c;
+  --cor-foto-vazia: #3a2d24;
+  --cor-borda: #45362b;
+  --cor-borda-forte: #5c4a3b;
+
+  --cor-cafe-escuro: #f3e9dc;
+  --cor-cafe-medio: #e4d4c2;
+  --cor-cafe: #e7c39b;
+  --cor-cafe-hover: #8a6446;
+  --cor-cafe-fundo: #7a5539;
+  --cor-taupe: #bba795;
+  --cor-taupe-escuro: #d0bfaf;
+  --cor-caramelo-escuro: #e3b282;
+  --cor-ferrugem: #e9a06a;
+
+  --cor-erro: #ff8f85;
+  --cor-erro-escuro: #ffb4ab;
+  --cor-erro-fundo: #3b1d1a;
+  --cor-erro-fundo-forte: #522520;
+  --cor-sucesso: #93d29c;
+  --cor-sucesso-fundo: #1d3122;
+  --cor-aviso: #f0c46a;
+  --cor-aviso-fundo: #3a2e14;
+
+  --cor-salvia-texto: #9fd3a6;
+  --cor-salvia-fundo: #1d3122;
+  --cor-ceu-texto: #a3c8e3;
+  --cor-ceu-fundo: #1a2a35;
+  --cor-mel-texto: #f0c46a;
+  --cor-mel-fundo: #3a2e14;
+  --cor-rosa-texto: #f5a5b1;
+  --cor-rosa-fundo: #3e1f25;
+  --cor-lavanda-texto: #cbb9ef;
+  --cor-lavanda-fundo: #2a2338;
+  --cor-terracota-texto: #f5ab93;
+  --cor-terracota-fundo: #3e2219;
+
+  --sombra-botao: 0 10px 24px -8px rgba(0, 0, 0, 0.6);
+  --sombra-card: 0 30px 60px -20px rgba(0, 0, 0, 0.55);
+  --sombra-suave: 0 14px 30px -22px rgba(0, 0, 0, 0.8);
+  --sombra-media: 0 22px 40px -24px rgba(0, 0, 0, 0.85);
+  --sombra-elevada: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px -18px rgba(0, 0, 0, 0.7);
+  --anel-foco: 0 0 0 4px rgba(216, 161, 107, 0.4);
+
+  color-scheme: dark;
 }
 
 *,

@@ -32,7 +32,7 @@
 
 .caixa:focus-within {
   border-color: var(--cor-caramelo);
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   box-shadow: var(--anel-foco);
 }
 

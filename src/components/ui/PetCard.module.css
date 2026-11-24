@@ -23,7 +23,7 @@
 }
 
 .branco {
-  background: var(--cor-branco);
+  background: var(--cor-papel);
 }
 
 .foto {
@@ -36,7 +36,7 @@
   border-radius: 50%;
   background: rgba(110, 77, 54, 0.08);
   box-shadow:
-    0 0 0 4px var(--cor-branco),
+    0 0 0 4px var(--cor-papel),
     0 0 0 5px var(--cor-borda);
 }
 

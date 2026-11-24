@@ -53,7 +53,7 @@
   padding: 36px;
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-lg);
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   box-shadow: var(--sombra-suave);
 }
 
@@ -216,7 +216,7 @@
   padding: 8px 14px 8px 8px;
   border: 1px dashed var(--cor-borda-forte);
   border-radius: 999px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   font-size: var(--texto-sm);
   font-weight: 600;
   color: var(--cor-cafe);
@@ -284,7 +284,7 @@
   padding: 12px 14px;
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-sm);
-  background: var(--cor-branco);
+  background: var(--cor-papel);
 }
 
 .numero dt {
@@ -341,7 +341,7 @@
 }
 
 .erro {
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   border: 1px dashed var(--cor-borda);
   color: var(--cor-taupe);
 }
@@ -469,7 +469,7 @@
   padding: 22px;
   border: 1px solid var(--cor-borda);
   border-radius: 20px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   box-shadow: var(--sombra-suave);
 }
 
@@ -619,7 +619,7 @@
   padding: 0 14px;
   border: 1px solid var(--cor-borda-forte);
   border-radius: 999px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   font: inherit;
   font-size: var(--texto-sm);
   font-weight: 700;
@@ -635,12 +635,12 @@
 
 .filtrosTipo button[aria-pressed='true'] {
   border-color: var(--cor-cafe);
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   color: var(--cor-branco);
 }
 
 .filtrosTipo button[aria-pressed='true'] small {
-  color: var(--cor-creme);
+  color: var(--cor-creme-fixo);
 }
 
 .notas {

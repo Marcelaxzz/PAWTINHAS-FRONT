@@ -20,7 +20,7 @@
   padding: 16px;
   border: 1px solid var(--cor-borda);
   border-radius: 18px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
 }
 
 .busca {

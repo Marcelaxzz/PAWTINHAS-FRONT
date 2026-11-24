@@ -41,7 +41,7 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   color: var(--cor-cafe-medio);
   box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.45);
   transition:
@@ -63,7 +63,7 @@
   bottom: 14px;
   padding: 5px 10px;
   border-radius: 999px;
-  background: var(--cor-cafe-escuro);
+  background: var(--cor-cafe-escuro-fundo);
   font-size: var(--texto-xs);
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -80,7 +80,7 @@
   background: var(--cor-caramelo);
   font-size: var(--texto-xs);
   font-weight: 700;
-  color: var(--cor-cafe-escuro);
+  color: var(--cor-cafe-escuro-fundo);
 }
 
 .corpo {
@@ -170,20 +170,20 @@
   box-sizing: content-box;
   padding: 7px;
   border-radius: 50%;
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   color: var(--cor-branco);
   transition: transform 0.18s ease;
 }
 
 .botao:hover,
 .card:hover .botao {
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   color: var(--cor-branco);
 }
 
 .botao:hover svg,
 .card:hover .botao svg {
   background: var(--cor-caramelo);
-  color: var(--cor-cafe-escuro);
+  color: var(--cor-cafe-escuro-fundo);
   transform: translateX(2px);
 }

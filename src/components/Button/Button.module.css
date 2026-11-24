@@ -58,7 +58,7 @@
   width: 16px;
   height: 16px;
   border: 2px solid rgba(255, 255, 255, 0.35);
-  border-top-color: var(--cor-branco);
+  border-top-color: var(--cor-papel);
   border-radius: 50%;
   animation: girar 0.7s linear infinite;
 }

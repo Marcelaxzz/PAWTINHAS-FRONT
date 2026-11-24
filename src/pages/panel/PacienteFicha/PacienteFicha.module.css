@@ -15,7 +15,7 @@
   width: 200px;
   height: 200px;
   overflow: hidden;
-  border: 5px solid var(--cor-branco);
+  border: 5px solid var(--cor-papel);
   border-radius: 50%;
   background: rgba(110, 77, 54, 0.08);
   box-shadow: 0 14px 30px -16px rgba(54, 36, 26, 0.5);
@@ -95,7 +95,7 @@
   padding: 28px 32px;
   border: 1px solid var(--cor-borda);
   border-radius: 28px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
 }
 
 .subtitulo {
@@ -203,7 +203,7 @@
   padding: 26px 28px;
   border: 1px solid var(--cor-borda);
   border-radius: 28px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
 }
 
 .cuidadoTopo {

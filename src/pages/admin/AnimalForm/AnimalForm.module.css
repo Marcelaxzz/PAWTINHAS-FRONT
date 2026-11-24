@@ -101,7 +101,7 @@
 
 .enviar {
   border: 0;
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   color: var(--cor-branco);
   box-shadow: 0 12px 22px -14px rgba(54, 36, 26, 0.7);
 }

@@ -4,7 +4,7 @@
   margin: 12px auto;
   padding: 16px 16px 0;
   border-radius: 10px;
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   box-shadow:
     0 2px 0 rgba(255, 255, 255, 0.08) inset,
     0 28px 48px -28px rgba(54, 36, 26, 0.7);
@@ -55,7 +55,7 @@
   white-space: nowrap;
   font-style: italic;
   font-weight: 600;
-  color: var(--cor-creme);
+  color: var(--cor-creme-fixo);
 }
 
 .pontos {

@@ -7,6 +7,7 @@ import { LoadingScreen } from './components/LoadingScreen/LoadingScreen.jsx'
 import { ScrollToTop } from './components/ScrollToTop/ScrollToTop.jsx'
 import { AlarmesDaConta } from './components/AlarmesNoNavegador/AlarmesDaConta.jsx'
 import { AtualizacaoAutomatica } from './components/AtualizacaoAutomatica/AtualizacaoAutomatica.jsx'
+import { BotaoTema } from './components/BotaoTema/BotaoTema.jsx'
 
 const page = (loader, name) => lazy(() => loader().then((module) => ({ default: module[name] })))
 
@@ -75,6 +76,7 @@ export function App() {
         <ToastProvider>
           <AlarmesDaConta />
           <AtualizacaoAutomatica />
+          <BotaoTema />
           <Suspense fallback={<LoadingScreen />}>
             <Routes>
               <Route path="/" element={<Welcome />} />

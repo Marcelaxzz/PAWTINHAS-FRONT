@@ -101,7 +101,7 @@
   padding: 0 16px;
   border: 1px solid var(--cor-borda);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.85);
+  background: color-mix(in srgb, var(--cor-papel) 85%, transparent);
   color: var(--cor-taupe);
   transition:
     border-color 0.18s ease,
@@ -155,7 +155,7 @@
   background: var(--cor-caramelo);
   font-size: var(--texto-base);
   font-weight: 700;
-  color: var(--cor-cafe-escuro);
+  color: var(--cor-cafe-escuro-fundo);
   transition: transform 0.18s ease;
 }
 
@@ -261,7 +261,7 @@
     z-index: 2;
     width: 44px;
     padding: 0 13px;
-    background: var(--cor-branco);
+    background: var(--cor-papel);
     transition:
       width 0.2s ease,
       border-color 0.18s ease,
@@ -370,4 +370,9 @@
     width: 38px;
     height: 38px;
   }
+}
+
+/* Modo escuro: o logo café vira creme para aparecer no fundo escuro. */
+:global(:root[data-tema='escuro']) .logo {
+  filter: brightness(0) invert(0.92) sepia(0.3);
 }

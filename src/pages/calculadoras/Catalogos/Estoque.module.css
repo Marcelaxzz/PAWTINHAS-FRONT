@@ -180,7 +180,7 @@
   bottom: -3px;
   width: 2px;
   border-radius: 2px;
-  background: var(--cor-cafe-escuro);
+  background: var(--cor-cafe-escuro-fundo);
 }
 
 .painelRodape {
@@ -216,13 +216,13 @@
 
 .painelAcoes button {
   border-color: var(--cor-borda-forte);
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   color: var(--cor-cafe);
 }
 
 .painelAcoes button:hover:not(:disabled) {
   border-color: var(--cor-cafe);
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   color: var(--cor-branco);
 }
 
@@ -311,7 +311,7 @@
   position: sticky;
   top: 0;
   padding: 10px 12px;
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   font-size: var(--texto-xs);
   font-weight: 700;
   text-align: left;

@@ -11,7 +11,7 @@
   height: 88px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid var(--cor-branco);
+  border: 3px solid var(--cor-papel);
   box-shadow: 0 8px 20px -10px rgba(54, 36, 26, 0.45);
 }
 
@@ -65,7 +65,7 @@
   padding: 0 14px;
   border: 1px solid var(--cor-borda);
   border-radius: 10px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   font-size: 0.9375rem;
   cursor: pointer;
 }

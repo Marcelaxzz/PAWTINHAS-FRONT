@@ -7,7 +7,7 @@
   overflow: hidden;
   border: 1px solid var(--cor-borda);
   border-radius: 26px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   box-shadow: var(--sombra-suave);
   transition:
     transform 0.2s ease,
@@ -28,7 +28,7 @@
   padding: 18px 8px 18px 20px;
   overflow: hidden;
   border: 0;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   cursor: pointer;
 }
 
@@ -81,7 +81,7 @@
 
 .etiquetas span:first-child {
   background: var(--cor-caramelo);
-  color: var(--cor-cafe-escuro);
+  color: var(--cor-cafe-escuro-fundo);
 }
 
 .titulo {
@@ -170,7 +170,7 @@
 }
 
 .detalhes:hover {
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   color: var(--cor-branco);
 }
 

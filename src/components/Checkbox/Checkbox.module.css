@@ -40,7 +40,7 @@
 }
 
 .nativo:checked + .caixa {
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   border-color: var(--cor-cafe);
 }
 

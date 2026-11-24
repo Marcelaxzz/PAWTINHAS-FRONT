@@ -151,7 +151,7 @@
 
 .botaoLogin {
   border: 1.5px solid var(--cor-borda-forte);
-  background: rgba(255, 253, 249, 0.75);
+  background: color-mix(in srgb, var(--cor-superficie) 75%, transparent);
   color: var(--cor-cafe);
 }
 
@@ -271,4 +271,9 @@
   .linkSobre {
     margin-top: 22px;
   }
+}
+
+/* Modo escuro: o logo café vira creme para aparecer no fundo escuro. */
+:global(:root[data-tema='escuro']) .logo {
+  filter: brightness(0) invert(0.92) sepia(0.3);
 }

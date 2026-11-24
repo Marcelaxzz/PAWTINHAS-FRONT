@@ -52,7 +52,7 @@
 }
 
 .solido {
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   color: var(--cor-branco);
 }
 
@@ -78,7 +78,7 @@
 }
 
 .fantasma {
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   border-color: var(--cor-borda);
   color: var(--cor-cafe-escuro);
 }

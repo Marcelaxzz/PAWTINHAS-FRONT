@@ -4,7 +4,7 @@
   gap: 6px;
   padding: 8px 18px;
   border-radius: 999px;
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   font-size: var(--texto-sm);
   font-weight: 600;
   color: var(--cor-branco);
@@ -127,7 +127,7 @@
   padding: 0;
   border: 1px solid var(--cor-borda);
   border-radius: 50%;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   color: var(--cor-rosa);
   transition: transform 0.18s ease;
 }

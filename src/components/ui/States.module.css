@@ -9,7 +9,7 @@
   font-size: var(--texto-base);
   border: 1.5px dashed var(--cor-borda);
   border-radius: 24px;
-  background: rgba(251, 246, 235, 0.6);
+  background: color-mix(in srgb, var(--cor-creme) 60%, transparent);
 }
 
 .erro {

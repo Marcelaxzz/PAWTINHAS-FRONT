@@ -7,8 +7,8 @@
   padding: 0;
   border: 0;
   border-radius: 14px;
-  background: var(--cor-cafe);
-  color: var(--cor-areia);
+  background: var(--cor-cafe-fundo);
+  color: var(--cor-areia-fixa);
   box-shadow: 0 8px 18px -12px rgba(54, 36, 26, 0.7);
   transition:
     background-color 0.18s ease,

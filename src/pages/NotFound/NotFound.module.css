@@ -44,7 +44,7 @@
   margin-top: 32px;
   padding: 14px 28px;
   border-radius: 999px;
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   font-weight: 600;
   color: var(--cor-branco);
   text-decoration: none;
@@ -54,4 +54,9 @@
 
 .botao:hover {
   transform: translateY(-2px);
+}
+
+/* Modo escuro: o logo café vira creme para aparecer no fundo escuro. */
+:global(:root[data-tema='escuro']) .logo {
+  filter: brightness(0) invert(0.92) sepia(0.3);
 }

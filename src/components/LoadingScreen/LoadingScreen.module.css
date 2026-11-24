@@ -18,3 +18,8 @@
     opacity: 0.7;
   }
 }
+
+/* Modo escuro: o logo café vira creme para aparecer no fundo escuro. */
+:global(:root[data-tema='escuro']) .logo {
+  filter: brightness(0) invert(0.92) sepia(0.3);
+}

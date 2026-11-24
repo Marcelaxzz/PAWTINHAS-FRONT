@@ -10,8 +10,8 @@
   overflow: hidden;
   padding: 18px 18px 20px;
   border-radius: 22px;
-  background: var(--cor-cafe-escuro);
-  color: var(--cor-creme);
+  background: var(--cor-cafe-escuro-fundo);
+  color: var(--cor-creme-fixo);
   box-shadow: 0 24px 48px -18px rgba(54, 36, 26, 0.65);
   animation: entrar 0.35s ease-out both;
 }
@@ -30,7 +30,7 @@
   height: 42px;
   border-radius: 50%;
   background: var(--cor-caramelo);
-  color: var(--cor-cafe-escuro);
+  color: var(--cor-cafe-escuro-fundo);
   animation: balancar 1s ease-in-out infinite;
 }
 
@@ -52,7 +52,7 @@
   font-family: var(--fonte-titulo);
   font-size: 1.375rem;
   line-height: 1.2;
-  color: var(--cor-creme);
+  color: var(--cor-creme-fixo);
 }
 
 .lista {
@@ -73,20 +73,20 @@
 
 .lista strong {
   font-weight: 600;
-  color: var(--cor-creme);
+  color: var(--cor-creme-fixo);
 }
 
 .lista span {
   font-size: var(--texto-sm);
-  color: var(--cor-areia);
+  color: var(--cor-areia-fixa);
 }
 
 .parar {
   min-height: 50px;
   border: 0;
   border-radius: 999px;
-  background: var(--cor-creme);
-  color: var(--cor-cafe-escuro);
+  background: var(--cor-creme-fixo);
+  color: var(--cor-cafe-escuro-fundo);
   font: inherit;
   font-size: var(--texto-md);
   font-weight: 700;
@@ -97,7 +97,7 @@
 }
 
 .parar:hover {
-  background: var(--cor-branco);
+  background: #ffffff;
 }
 
 .parar:active {
@@ -113,7 +113,7 @@
   margin: -6px 0 0;
   font-size: var(--texto-xs);
   text-align: center;
-  color: var(--cor-areia);
+  color: var(--cor-areia-fixa);
   opacity: 0.85;
 }
 
@@ -131,7 +131,7 @@
 
 .parado .icone {
   animation: none;
-  background: var(--cor-areia);
+  background: var(--cor-areia-fixa);
 }
 
 @keyframes entrar {

@@ -63,7 +63,7 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--cor-areia);
+  color: var(--cor-areia-fixa);
 }
 
 .slideTexto h2 {
@@ -91,7 +91,7 @@
   font-size: 1.25rem;
   font-style: italic;
   line-height: 1.35;
-  color: var(--cor-areia);
+  color: var(--cor-areia-fixa);
 }
 
 .slideDescricao {
@@ -105,7 +105,7 @@
 .slideBotao {
   margin-top: 24px;
   background: var(--cor-caramelo);
-  color: var(--cor-cafe-escuro);
+  color: var(--cor-cafe-escuro-fundo);
 }
 
 .slideBotao:hover {
@@ -187,7 +187,7 @@
   padding: 0 20px;
   border: 1px solid var(--cor-borda);
   border-radius: 999px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   font-size: var(--texto-sm);
   font-weight: 600;
   color: var(--cor-taupe-escuro);
@@ -204,7 +204,7 @@
 .filtroAtivo,
 .filtroAtivo:hover {
   border-color: var(--cor-cafe);
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   color: var(--cor-branco);
 }
 

@@ -48,7 +48,7 @@
 }
 
 .sucesso {
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   color: var(--cor-branco);
 }
 

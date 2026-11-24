@@ -41,7 +41,7 @@
   min-height: 50px;
   padding: 0 16px;
   border-radius: var(--raio-md);
-  background: rgba(251, 246, 235, 0.95);
+  background: color-mix(in srgb, var(--cor-creme) 95%, transparent);
   font-size: var(--texto-base);
   color: var(--cor-cafe-escuro);
 }
@@ -69,7 +69,7 @@
 .contato {
   padding: 26px 26px 24px;
   border-radius: var(--raio-lg);
-  background: linear-gradient(135deg, var(--cor-cafe) 0%, var(--cor-ferrugem) 55%, var(--cor-caramelo-escuro) 100%);
+  background: linear-gradient(135deg, var(--cor-cafe-fundo) 0%, var(--cor-ferrugem) 55%, var(--cor-caramelo-escuro) 100%);
   color: var(--cor-branco);
   box-shadow: var(--sombra-suave);
 }
@@ -118,7 +118,7 @@
   margin-top: 18px;
   padding: 0 22px;
   border-radius: 999px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   font-size: var(--texto-base);
   font-weight: 700;
   color: var(--cor-cafe-escuro);
@@ -158,7 +158,7 @@
   padding: 0 20px;
   border: 1.5px solid var(--cor-borda);
   border-radius: 999px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   font-size: var(--texto-sm);
   font-weight: 600;
   color: var(--cor-cafe);
@@ -220,7 +220,7 @@
   padding: 22px 24px;
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-lg);
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   box-shadow: var(--sombra-suave);
 }
 

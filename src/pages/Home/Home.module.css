@@ -113,7 +113,7 @@
 .atalho:first-child {
   border-color: var(--cor-caramelo);
   background: var(--cor-caramelo);
-  color: var(--cor-cafe-escuro);
+  color: var(--cor-cafe-escuro-fundo);
 }
 
 .atalho:hover {
@@ -330,7 +330,7 @@
   width: 78px;
   height: 78px;
   margin-bottom: 8px;
-  border: 3px solid var(--cor-branco);
+  border: 3px solid var(--cor-papel);
   border-radius: 50%;
   box-shadow: 0 6px 14px rgba(54, 36, 26, 0.16);
   object-fit: cover;
@@ -343,7 +343,7 @@
   font-family: var(--fonte-serifa);
   font-size: 2rem;
   font-weight: 900;
-  color: var(--cor-cafe-escuro);
+  color: var(--cor-cafe-escuro-fundo);
 }
 
 .pet strong {
@@ -423,7 +423,7 @@
 }
 
 .verTudo:hover {
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   color: var(--cor-branco);
 }
 
@@ -455,7 +455,7 @@
   border: 1px solid var(--cor-borda);
   border-left: 5px solid var(--tom);
   border-radius: 16px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
 }
 
 .hora {
@@ -526,7 +526,7 @@
   inset: auto 0 0;
   min-height: 6px;
   border-radius: 12px;
-  background: linear-gradient(180deg, var(--cor-caramelo) 0%, var(--cor-cafe) 100%);
+  background: linear-gradient(180deg, var(--cor-caramelo) 0%, var(--cor-cafe-fundo) 100%);
   transition: height 0.4s ease;
 }
 
@@ -594,7 +594,7 @@
   flex: none;
   padding: 6px 10px;
   border-radius: 10px;
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   font-size: var(--texto-base);
   font-weight: 800;
   color: var(--cor-branco);
@@ -615,7 +615,7 @@
   padding: 0 14px;
   border: 1px solid var(--cor-borda-forte);
   border-radius: 14px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
   font: inherit;
   font-size: var(--texto-base);
   font-weight: 700;
@@ -628,7 +628,7 @@
 
 .relatorios button:hover:not(:disabled) {
   border-color: var(--cor-cafe);
-  background: var(--cor-cafe);
+  background: var(--cor-cafe-fundo);
   color: var(--cor-branco);
 }
 

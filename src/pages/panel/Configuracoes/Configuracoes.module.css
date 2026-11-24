@@ -15,7 +15,7 @@
   padding: 28px;
   border: 1px solid var(--cor-borda);
   border-radius: 24px;
-  background: var(--cor-branco);
+  background: var(--cor-papel);
 }
 
 .cartaoTopo {
@@ -104,7 +104,7 @@
   background: var(--cor-caramelo);
   font-size: 0.9375rem;
   font-weight: 700;
-  color: var(--cor-cafe-escuro);
+  color: var(--cor-cafe-escuro-fundo);
 }
 
 .usuarioTexto {
