@@ -7,6 +7,7 @@ import {
   ClockIcon,
   DownloadIcon,
   HeartIcon,
+  PawFilled,
   PillIcon,
   PlusIcon,
   StethoscopeIcon,
@@ -22,6 +23,7 @@ import { montarPainel, RECURSOS_PAINEL, saudacao, TOM_SERVICO } from '../../util
 import { SITUACOES, qtd } from '../calculadoras/Catalogos/estoque.js'
 import pets from '../../assets/images/pets-inicio.webp'
 import { photoSrc } from '../../utils/images.js'
+import { aniversario, emojiDaHora, tomDaEspecie } from '../../utils/enfeites.js'
 import styles from './Home.module.css'
 
 const ICONES = { agenda: CalendarIcon, emergencias: AlertIcon, pacientes: UsersIcon, estoque: PillIcon }
@@ -60,6 +62,10 @@ export function Home() {
   }, [])
 
   const painel = useMemo(() => (data ? montarPainel(data, lookup, estoque) : null), [data, lookup, estoque])
+  const aniversariantes = useMemo(
+    () => (data?.pets ?? []).filter((p) => aniversario(p.dataNascimento)?.hoje).slice(0, 4),
+    [data],
+  )
 
   const relatorios = [
     { id: 'agenda', rotulo: 'Agenda do mês', baixar: () => relatoriosService.pdfAgenda({ de: inicioDoMes() }) },
@@ -90,7 +96,10 @@ export function Home() {
             </p>
             <h1 className={styles.titulo}>
               {saudacao(agora.getHours())}
-              {firstName && `, ${firstName}`}!
+              {firstName && `, ${firstName}`}!{' '}
+              <span className={styles.emoji} aria-hidden="true">
+                {emojiDaHora(agora.getHours())}
+              </span>
             </h1>
             <p className={styles.resumoTexto}>
               {!painel ? (
@@ -104,6 +113,18 @@ export function Home() {
                 'Nenhum atendimento pendente no restante do dia.'
               )}
             </p>
+            {aniversariantes.length > 0 && (
+              <p className={styles.festa}>
+                <span aria-hidden="true">🎂</span> Hoje é aniversário de{' '}
+                {aniversariantes.map((p, i) => (
+                  <span key={p.id}>
+                    {i > 0 && (i === aniversariantes.length - 1 ? ' e ' : ', ')}
+                    <Link to={`/pacientes/${encodeURIComponent(p.id)}`}>{p.nome}</Link>
+                  </span>
+                ))}
+                !
+              </p>
+            )}
             <div className={styles.atalhos}>
               {ATALHOS.map(({ to, rotulo, icone: Icone }) => (
                 <Link key={to} to={to} className={styles.atalho}>
@@ -227,19 +248,27 @@ export function Home() {
                   {[...data.pets]
                     .sort((a, b) => Number(Boolean(photoSrc(b.foto))) - Number(Boolean(photoSrc(a.foto))))
                     .slice(0, 24)
-                    .map((p) => (
-                      <li key={p.id}>
-                        <Link to={`/pacientes/${encodeURIComponent(p.id)}`} className={styles.pet}>
-                          {photoSrc(p.foto) ? (
-                            <img src={photoSrc(p.foto)} alt="" loading="lazy" />
-                          ) : (
-                            <span className={styles.petInicial}>{p.nome.slice(0, 1)}</span>
-                          )}
-                          <strong>{p.nome}</strong>
-                          <small>{p.especie}</small>
-                        </Link>
-                      </li>
-                    ))}
+                    .map((p) => {
+                      const tom = tomDaEspecie(p.especie)
+                      const festa = aniversario(p.dataNascimento)
+                      return (
+                        <li key={p.id}>
+                          <Link to={`/pacientes/${encodeURIComponent(p.id)}`} className={styles.pet}>
+                            <span className={styles.petAvatar}>
+                              <FotoOuInicial foto={photoSrc(p.foto)} nome={p.nome} tom={tom} />
+                              {festa && (
+                                <span className={styles.petBolo} title={festa.texto}>
+                                  🎂
+                                </span>
+                              )}
+                            </span>
+                            <strong>{p.nome}</strong>
+                            <small style={{ color: `var(--cor-${tom}-texto)` }}>{p.especie}</small>
+                            {festa && <span className="visualmente-oculto">{festa.texto}</span>}
+                          </Link>
+                        </li>
+                      )
+                    })}
                 </ul>
               </section>
             </div>
@@ -339,5 +368,20 @@ export function Home() {
         )}
       </div>
     </main>
+  )
+}
+
+/** Foto do pet; sem foto (ou se ela não carregar), a inicial na cor da espécie com uma patinha. */
+function FotoOuInicial({ foto, nome, tom }) {
+  const [falhou, setFalhou] = useState(false)
+  if (foto && !falhou) return <img src={foto} alt="" loading="lazy" onError={() => setFalhou(true)} />
+  return (
+    <span
+      className={styles.petInicial}
+      style={{ background: `var(--cor-${tom}-fundo)`, color: `var(--cor-${tom}-texto)` }}
+    >
+      {nome.slice(0, 1)}
+      <PawFilled size={15} fill="currentColor" className={styles.petPatinha} />
+    </span>
   )
 }

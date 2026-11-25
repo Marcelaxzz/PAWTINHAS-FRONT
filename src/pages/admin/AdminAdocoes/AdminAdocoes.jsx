@@ -24,6 +24,7 @@ import { sexoEspecie } from '../../../utils/adocao.js'
 import { normalize } from '../../../utils/text.js'
 import logoContorno from '../../../assets/images/logo-pawtinhas-contorno.webp'
 import styles from './AdminAdocoes.module.css'
+import { soltarConfete } from '../../../utils/confete.js'
 
 const STATUS_FILTRO = ['Todos', 'Disponível', 'Em processo', 'Adotado']
 
@@ -98,7 +99,12 @@ export function AdminAdocoes() {
     try {
       const updated = await dataService.update('animais', editing.id, payload)
       patchLocal('animais', updated)
-      toast.success(`${updated.nome} foi atualizado(a)!`)
+      if (updated.status === 'Adotado' && editing.status !== 'Adotado') {
+        soltarConfete()
+        toast.success(`${updated.nome} encontrou um lar! 🎉`)
+      } else {
+        toast.success(`${updated.nome} foi atualizado(a)!`)
+      }
       navigate('/admin/adocoes', { replace: true })
     } catch (err) {
       toast.error(err.message)

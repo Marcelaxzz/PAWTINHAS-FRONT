@@ -5,13 +5,14 @@ import { Chip, StatusChip } from '../../../components/ui/Chip.jsx'
 import { PillButton } from '../../../components/ui/PillButton.jsx'
 import { ConfirmDialog } from '../../../components/ui/Dialog.jsx'
 import { EmptyState, ErrorState, LoadingState } from '../../../components/ui/States.jsx'
-import { DownloadIcon, PawOutline, PencilIcon, PillIcon, TrashIcon } from '../../../components/Icons/Icons.jsx'
+import { DownloadIcon, PawFilled, PencilIcon, PillIcon, TrashIcon } from '../../../components/Icons/Icons.jsx'
 import { useClinic } from '../../../hooks/useClinic.js'
 import { useToast } from '../../../hooks/useToast.js'
 import { dataService } from '../../../services/dataService.js'
 import { relatoriosService } from '../../../services/gestaoService.js'
 import { formatDateBr } from '../../../utils/dates.js'
 import { formatNumber, formatQuantidade } from '../../../utils/numbers.js'
+import { aniversario, tomDaEspecie } from '../../../utils/enfeites.js'
 import { Alimentacao, Tratamentos } from './CuidadosPaciente.jsx'
 import styles from './PacienteFicha.module.css'
 
@@ -98,6 +99,7 @@ export function PacienteFicha() {
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [baixando, setBaixando] = useState(false)
+  const [fotoFalhou, setFotoFalhou] = useState(null)
 
   const baixarFicha = async () => {
     setBaixando(true)
@@ -152,6 +154,10 @@ export function PacienteFicha() {
     )
   }
 
+  const tom = tomDaEspecie(pet.especie)
+  const foto = lookup.petPhoto(pet.id)
+  const temFoto = Boolean(foto) && fotoFalhou !== foto
+  const festa = aniversario(pet.dataNascimento)
   const info = [
     ['Espécie', pet.especie],
     ['Raça', pet.raca],
@@ -166,17 +172,31 @@ export function PacienteFicha() {
   return (
     <Page title="Ficha do paciente">
       <section className={styles.perfil}>
-        <div className={styles.foto}>
-          {lookup.petPhoto(pet.id) ? (
-            <img src={lookup.petPhoto(pet.id)} alt={`Foto de ${pet.nome}`} />
+        <div
+          className={styles.foto}
+          style={
+            temFoto ? undefined : { background: `var(--cor-${tom}-fundo)`, color: `var(--cor-${tom}-texto)` }
+          }
+        >
+          {temFoto ? (
+            <img src={foto} alt={`Foto de ${pet.nome}`} onError={() => setFotoFalhou(foto)} />
           ) : (
-            <PawOutline className={styles.semFoto} />
+            <span className={styles.inicial}>
+              {pet.nome.slice(0, 1)}
+              <PawFilled fill="currentColor" className={styles.inicialPata} />
+            </span>
           )}
         </div>
         <div className={styles.dados}>
           <div className={styles.nomeLinha}>
             <h2 className={styles.nome}>{pet.nome}</h2>
+            {pet.especie && <Chip tone={tom}>{pet.especie}</Chip>}
             {pet.idade && <Chip>{pet.idade}</Chip>}
+            {festa && (
+              <Chip tone="rosa">
+                <span aria-hidden="true">🎂</span> {festa.texto}
+              </Chip>
+            )}
           </div>
           <dl className={styles.info}>
             {info.map(([label, value]) => (

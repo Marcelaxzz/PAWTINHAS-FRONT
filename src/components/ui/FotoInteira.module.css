@@ -29,8 +29,16 @@
 
 .semFoto {
   display: grid;
-  place-items: center;
+  place-content: center;
+  justify-items: center;
+  gap: 8px;
   height: 100%;
   font-size: var(--texto-sm);
   color: var(--cor-taupe);
+}
+
+.patinha {
+  width: 44px;
+  color: var(--cor-caramelo);
+  opacity: 0.6;
 }

@@ -83,6 +83,19 @@
   color: var(--cor-cafe-escuro-fundo);
 }
 
+.novo {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: #3f6a45;
+  font-size: var(--texto-xs);
+  font-weight: 700;
+  color: #ffffff;
+  box-shadow: 0 6px 14px -8px rgba(0, 0, 0, 0.5);
+}
+
 .corpo {
   display: flex;
   flex-direction: column;

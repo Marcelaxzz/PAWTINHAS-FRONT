@@ -17,9 +17,43 @@ function fimDoTratamento(p) {
   return addDaysIso(p.duracaoDias - 1, new Date(`${p.inicio}T12:00:00`))
 }
 
+/** Em que dia do tratamento estamos: "Dia 3 de 7" e quanto da barra preencher. */
+function progresso(p) {
+  const hoje = todayIso()
+  if (!p.inicio || !p.duracaoDias) return null
+  if (p.inicio > hoje) return { porcento: 0, texto: `Começa em ${formatDateBr(p.inicio)}` }
+  const passados = Math.round((new Date(`${hoje}T12:00:00`) - new Date(`${p.inicio}T12:00:00`)) / 86400000)
+  const dia = Math.min(p.duracaoDias, passados + 1)
+  const faltam = p.duracaoDias - dia
+  return {
+    porcento: (dia / p.duracaoDias) * 100,
+    texto: `Dia ${dia} de ${p.duracaoDias}${faltam === 0 ? ' · último dia' : ` · ${faltam === 1 ? 'falta 1 dia' : `faltam ${faltam} dias`}`}`,
+  }
+}
+
 /** "Ativa" vira "Concluída" na tela quando o período já terminou. */
 function statusExibido(p) {
   return p.status === 'Ativa' && fimDoTratamento(p) < todayIso() ? 'Concluída' : p.status
+}
+
+function BarraDoTratamento({ p }) {
+  const andamento = progresso(p)
+  if (!andamento) return null
+  return (
+    <div className={styles.progresso}>
+      <span
+        className={styles.progressoTrilho}
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(andamento.porcento)}
+        aria-label={`Andamento do tratamento com ${p.medicamento}`}
+      >
+        <span style={{ width: `${andamento.porcento}%` }} />
+      </span>
+      <small>{andamento.texto}</small>
+    </div>
+  )
 }
 
 export function Tratamentos({ pet, prescricoes, patchLocal }) {
@@ -89,6 +123,7 @@ export function Tratamentos({ pet, prescricoes, patchLocal }) {
                   {formatDateBr(fimDoTratamento(p))} · 1ª dose às {p.horaPrimeiraDose} · total{' '}
                   {formatQuantidade(p.quantidadeTotal, p.unidade)}
                 </p>
+                {status === 'Ativa' && <BarraDoTratamento p={p} />}
                 {p.alarmeId && (
                   <p className={styles.cuidadoApoio}>
                     <ChipIcon size={14} /> Alarme no ESP32

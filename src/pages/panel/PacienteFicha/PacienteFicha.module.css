@@ -33,6 +33,26 @@
   opacity: 0.4;
 }
 
+/* Sem foto: a inicial do nome na cor da espécie, com uma patinha. */
+.inicial {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: var(--fonte-serifa);
+  font-size: 4.5rem;
+  font-weight: 900;
+}
+
+.inicialPata {
+  position: absolute;
+  right: 24%;
+  bottom: 22%;
+  width: 15%;
+  opacity: 0.55;
+}
+
 .dados {
   flex: 1;
   min-width: 0;
@@ -405,4 +425,34 @@
   .cuidado {
     padding: 22px 18px;
   }
+}
+
+/* Barra do tratamento: quanto já passou do período receitado. */
+.progresso {
+  display: grid;
+  gap: 5px;
+  margin: 8px 0 4px;
+}
+
+.progressoTrilho {
+  display: block;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--cor-borda);
+}
+
+.progressoTrilho > span {
+  display: block;
+  height: 100%;
+  min-width: 8px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--cor-caramelo), var(--cor-salvia));
+  transition: width 0.4s ease;
+}
+
+.progresso small {
+  font-size: var(--texto-xs);
+  font-weight: 600;
+  color: var(--cor-taupe-escuro);
 }

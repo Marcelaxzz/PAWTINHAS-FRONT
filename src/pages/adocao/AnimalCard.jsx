@@ -3,6 +3,7 @@ import { ArrowRightIcon, HeartIcon, MapPinIcon } from '../../components/Icons/Ic
 import { FotoInteira } from '../../components/ui/FotoInteira.jsx'
 import { photoSrc } from '../../utils/images.js'
 import { sexoEspecie } from '../../utils/adocao.js'
+import { chegouHaPouco } from '../../utils/enfeites.js'
 import styles from './AnimalCard.module.css'
 
 /** Card vertical do catálogo público. */
@@ -20,7 +21,11 @@ export function AnimalCard({ animal, favorite, onToggleFavorite }) {
           <HeartIcon size={20} filled={favorite} strokeWidth={2.2} />
         </button>
         <span className={styles.selo}>{sexoEspecie(animal)}</span>
-        {animal.status === 'Em processo' && <span className={styles.processo}>Em processo de adoção</span>}
+        {animal.status === 'Em processo' ? (
+          <span className={styles.processo}>Em processo de adoção</span>
+        ) : (
+          chegouHaPouco(animal) && <span className={styles.novo}>Novo por aqui</span>
+        )}
       </FotoInteira>
       <div className={styles.corpo}>
         <div className={styles.topo}>

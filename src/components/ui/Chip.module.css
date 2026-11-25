@@ -53,3 +53,34 @@
   background: var(--cor-ceu-fundo);
   color: var(--cor-ceu-texto);
 }
+
+/* Tons por espécie e o de aniversário (mesmos pares da paleta de apoio). */
+.mel {
+  background: var(--cor-mel-fundo);
+  color: var(--cor-mel-texto);
+}
+
+.lavanda {
+  background: var(--cor-lavanda-fundo);
+  color: var(--cor-lavanda-texto);
+}
+
+.salvia {
+  background: var(--cor-salvia-fundo);
+  color: var(--cor-salvia-texto);
+}
+
+.ceu {
+  background: var(--cor-ceu-fundo);
+  color: var(--cor-ceu-texto);
+}
+
+.rosa {
+  background: var(--cor-rosa-fundo);
+  color: var(--cor-rosa-texto);
+}
+
+.terracota {
+  background: var(--cor-terracota-fundo);
+  color: var(--cor-terracota-texto);
+}

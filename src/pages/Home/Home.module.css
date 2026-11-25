@@ -80,6 +80,48 @@
   color: var(--cor-branco);
 }
 
+/* Emoji da saudação: sol, sol entre nuvens ou lua. */
+.emoji {
+  display: inline-block;
+  font-size: 0.8em;
+  transform-origin: 70% 70%;
+  animation: aceno 1.6s ease 0.4s 1 both;
+}
+
+@keyframes aceno {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-14deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-6deg);
+  }
+}
+
+/* "Hoje é aniversário de..." */
+.festa {
+  display: inline-block;
+  max-width: 560px;
+  margin-top: 12px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: var(--texto-sm);
+  font-weight: 600;
+  color: var(--cor-creme-fixo);
+}
+
+.festa a {
+  color: var(--cor-branco);
+  text-underline-offset: 3px;
+}
+
 /* Quatro atalhos do mesmo tamanho, em 2 × 2: nenhum fica sozinho na linha. */
 .atalhos {
   display: grid;
@@ -325,11 +367,38 @@
   transform: translateY(-2px);
 }
 
+/* Foto ou inicial, com o bolinho de aniversário no canto. */
+.petAvatar {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.petBolo {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--cor-papel);
+  border-radius: 50%;
+  background: var(--cor-rosa-fundo);
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+.petPatinha {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  opacity: 0.55;
+}
+
 .pet img,
 .petInicial {
   width: 78px;
   height: 78px;
-  margin-bottom: 8px;
   border: 3px solid var(--cor-papel);
   border-radius: 50%;
   box-shadow: 0 6px 14px rgba(54, 36, 26, 0.16);
@@ -337,6 +406,7 @@
 }
 
 .petInicial {
+  position: relative;
   display: grid;
   place-items: center;
   background: var(--cor-caramelo);

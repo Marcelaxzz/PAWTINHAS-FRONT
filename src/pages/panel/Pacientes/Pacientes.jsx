@@ -10,6 +10,7 @@ import { EmptyState, ErrorState, LoadingState } from '../../../components/ui/Sta
 import { ChevronDownIcon, SearchIcon } from '../../../components/Icons/Icons.jsx'
 import { useClinic } from '../../../hooks/useClinic.js'
 import { normalize } from '../../../utils/text.js'
+import { aniversario, tomDaEspecie } from '../../../utils/enfeites.js'
 import { PACIENTES_TABS } from '../pacientesTabs.js'
 import lists from '../panelLists.module.css'
 import styles from './Pacientes.module.css'
@@ -89,8 +90,9 @@ export function Pacientes() {
                   key={pet.id}
                   avatar={96}
                   photo={lookup.petPhoto(pet.id)}
+                  especie={pet.especie}
                   title={pet.nome}
-                  badges={pet.idade && <Chip size="sm">{pet.idade}</Chip>}
+                  badges={<EtiquetasDoPet pet={pet} />}
                   actions={
                     <PillButton variant="contorno" size="lg" to={`/pacientes/${pet.id}`} className={styles.ficha}>
                       Abrir ficha
@@ -135,5 +137,25 @@ export function Pacientes() {
         </>
       )}
     </Page>
+  )
+}
+
+/** Espécie na cor dela, idade e, na semana do aniversário, um bolinho. */
+function EtiquetasDoPet({ pet }) {
+  const festa = aniversario(pet.dataNascimento)
+  return (
+    <>
+      {pet.especie && (
+        <Chip size="sm" tone={tomDaEspecie(pet.especie)}>
+          {pet.especie}
+        </Chip>
+      )}
+      {pet.idade && <Chip size="sm">{pet.idade}</Chip>}
+      {festa && (
+        <Chip size="sm" tone="rosa">
+          <span aria-hidden="true">🎂</span> {festa.texto}
+        </Chip>
+      )}
+    </>
   )
 }

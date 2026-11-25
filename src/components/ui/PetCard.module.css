@@ -72,6 +72,77 @@
   opacity: 0.4;
 }
 
+/* Sem foto: fundo e patinha na cor da espécie. */
+.tom_mel,
+.tom_lavanda,
+.tom_salvia,
+.tom_ceu,
+.tom_rosa,
+.tom_terracota {
+  background: var(--tom-fundo);
+}
+
+.tom_mel {
+  --tom-texto: var(--cor-mel-texto);
+  --tom-fundo: var(--cor-mel-fundo);
+}
+
+.tom_lavanda {
+  --tom-texto: var(--cor-lavanda-texto);
+  --tom-fundo: var(--cor-lavanda-fundo);
+}
+
+.tom_salvia {
+  --tom-texto: var(--cor-salvia-texto);
+  --tom-fundo: var(--cor-salvia-fundo);
+}
+
+.tom_ceu {
+  --tom-texto: var(--cor-ceu-texto);
+  --tom-fundo: var(--cor-ceu-fundo);
+}
+
+.tom_rosa {
+  --tom-texto: var(--cor-rosa-texto);
+  --tom-fundo: var(--cor-rosa-fundo);
+}
+
+.tom_terracota {
+  --tom-texto: var(--cor-terracota-texto);
+  --tom-fundo: var(--cor-terracota-fundo);
+}
+
+/* Sem foto e com espécie: a inicial do nome com uma patinha, como no início. */
+.inicial {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: var(--fonte-serifa);
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--tom-texto, var(--cor-cafe));
+}
+
+.inicialPata {
+  position: absolute;
+  right: 22%;
+  bottom: 20%;
+  width: 17%;
+  opacity: 0.55;
+}
+
+.tom_mel > .semFoto,
+.tom_lavanda > .semFoto,
+.tom_salvia > .semFoto,
+.tom_ceu > .semFoto,
+.tom_rosa > .semFoto,
+.tom_terracota > .semFoto {
+  color: var(--tom-texto);
+  opacity: 0.75;
+}
+
 .corpo {
   flex: 1;
   min-width: 0;

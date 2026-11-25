@@ -2,6 +2,7 @@ import { ApiError, request } from './http.js'
 import { pickFields } from './resources.js'
 import { ADAPTADORES, camposDaTela } from './adaptadores.js'
 import { ehFotoNova, formularioDaFoto } from './arquivos.js'
+import { esquecerContagens } from './contagens.js'
 
 function adaptador(recurso) {
   const a = ADAPTADORES[recurso]
@@ -47,6 +48,7 @@ export const dataService = {
   },
 
   async create(recurso, dados) {
+    esquecerContagens()
     const a = adaptador(recurso)
     const valores = await prepararFoto(pickFields(recurso, dados))
     return traduzindoErros(a, async () => a.de(await request(a.caminho, { method: 'POST', body: a.para(valores) })))
@@ -54,6 +56,7 @@ export const dataService = {
 
   /** Envie só os campos alterados: o restante vem do registro atual. */
   async update(recurso, id, mudancas) {
+    esquecerContagens()
     const a = adaptador(recurso)
     const alteracoes = await prepararFoto(pickFields(recurso, mudancas))
 
@@ -67,5 +70,8 @@ export const dataService = {
     })
   },
 
-  remove: (recurso, id) => request(comId(adaptador(recurso), id), { method: 'DELETE' }),
+  remove(recurso, id) {
+    esquecerContagens()
+    return request(comId(adaptador(recurso), id), { method: 'DELETE' })
+  },
 }
